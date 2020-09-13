@@ -40,7 +40,33 @@ If your client side code stashes the JWT into the user's browser's local storage
 What can a user do if they find their email account has been hacked?  Good question but what is the answer to how can they recover their emails? Not sure what the answer is but this suggests the need to consider a second means of verifying users when the application information is important to users.  npuser is not intended to protect high value personal information.
 
 
+## Some ideas to explore
+
+### No password
+Passwordless and 2FA auth without a database. This library "uses cryptography techniques to generate timestamped tokens, eliminating the need for a database to store tokens. The tokens themselves contain all the information needed to check for their validity."
+https://github.com/sffc/easy-no-password
+
+Downside is the tokens are long and only work if the user is given a link in the email to click. Not clear why a short 6 digit number like Github uses isn't sufficient, in 99.99% of the time (server up time)
 
 
+### Postfix as a Send-Only SMTP Server
+
+Postfix as a Send-Only SMTP Server on Debian 10. DigitalOcean article.  Postfix is a mail transfer agent (MTA), an application used to send and receive email. In this tutorial, you'll install and configure Postfix as a send-only SMTP server on Debian
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-debian-10
+
+### Postfix in Docker
+
+Simple SMTP server / postfix null relay host for your Docker and Kubernetes containers. Based on Alpine Linux. - bokysan/docker-postfix
+https://github.com/bokysan/docker-postfix
+
+### No Reply
+Creating no-reply@domain.com account in Postfix
+http://webpatrika.blogspot.com/2007/04/creating-no-replydomaincom-account-in.html?m=1
+
+## Project Planning
+ - The MVP version can read client API keys from a file on the server.
+ - The MVP version may use alternatives to Postfix for sending email.
+ - Use Caddy to get HTTPs and proxy the calls to the service.
+ 
 
 [1]: ./NoPasswordUserAuth.png 
