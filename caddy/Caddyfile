@@ -1,0 +1,7 @@
+npuser.memsharp.com
+
+root * /usr/share/caddy
+
+log {
+    level DEBUG
+}

@@ -1,0 +1,25 @@
+version: '3'
+services:
+  caddy:
+    build:
+      context: ../caddy
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV
+        - PROXY_PASS_HOST
+        - SERVER_PORT
+        - DOMAIN
+        - CURRENT_UID
+    # user: ${CURRENT_UID}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../site:/home/caddy/public_html
+      - ../caddy/caddy_data:/data
+      - ../caddy:/config
+      - ../site:/usr/share/caddy
+      - ../caddy/Caddyfile:/etc/Caddyfile
+      - ../caddy/caddy_data:/data
+      - ../caddy/caddy_config:/config
+        caddy caddy file-server --domain npuser.memsharp.com
