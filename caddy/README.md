@@ -30,3 +30,11 @@ Sample output
 ```
 2020-09-16 12:21:15|196.154.245.233|/somepath|GET|HTTP/2.0|304|Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:80.0) Gecko/20100101 Firefox/80.0
 ```
+
+
+## First step client
+
+Use Vue cli to generate sample vue. Run build and copy contents of dist to this caddy/site directory.
+rsync -r -e 'ssh -p 8022' * npuser@165.227.37.212:/home/npuser/npuser/caddy
+
+rerun docker on server and verify can see new Vuew client app.

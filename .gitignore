@@ -2,3 +2,4 @@
 src/debug.sh
 .history
 .env*
+caddy/site/

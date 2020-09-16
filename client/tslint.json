@@ -14,6 +14,13 @@
     "no-consecutive-blank-lines": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
-    "quotemark": [true, "single"]
+    "semicolon": [true, "never"],
+    "quotemark": [true, "single"],
+    "space-before-function-paren": [true, "always"],
+    "quotes": [
+      "warn", "single"
+    ],
+    "no-console": false
+
   }
 }
