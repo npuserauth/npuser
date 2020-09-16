@@ -22,18 +22,18 @@ function worker (el: { innerHTML: string },
     html.push('<p>')
     sentences.forEach((s) => {
       if (seenOne) { html.push('</p><p>') }
-      if (s.startsWith("- ")) {
+      if (s.startsWith('- ')) {
         if (!openList) {
           openList = true
-          html.push("<ul>")
+          html.push('<ul>')
         }
         s = s.substring(2)
         openListItem = true
-        html.push("<li>")
+        html.push('<li>')
       } else {
         if (openList) {
           openList = false
-          html.push("</ul>")
+          html.push('</ul>')
         }
       }
       if (binding.modifiers.noAutoLink) {
@@ -43,7 +43,7 @@ function worker (el: { innerHTML: string },
       }
       if (openListItem) {
         openListItem = false
-        html.push("</li>")
+        html.push('</li>')
       }
       seenOne = true
     })
