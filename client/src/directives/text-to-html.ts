@@ -17,13 +17,33 @@ function worker (el: { innerHTML: string },
     const sentences = binding.value.split('\n')
     const html = []
     let seenOne = false
+    let openList = false
+    let openListItem = false
     html.push('<p>')
     sentences.forEach((s) => {
       if (seenOne) { html.push('</p><p>') }
+      if (s.startsWith("- ")) {
+        if (!openList) {
+          openList = true
+          html.push("<ul>")
+        }
+        s = s.substring(2)
+        openListItem = true
+        html.push("<li>")
+      } else {
+        if (openList) {
+          openList = false
+          html.push("</ul>")
+        }
+      }
       if (binding.modifiers.noAutoLink) {
         html.push(s)
       } else {
         html.push(linky(s))
+      }
+      if (openListItem) {
+        openListItem = false
+        html.push("</li>")
       }
       seenOne = true
     })

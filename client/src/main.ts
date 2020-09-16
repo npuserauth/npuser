@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import textToHtml from './directives/text-to-html'
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 Vue.directive('textToHtml', textToHtml) // used as text-to-html attribute
@@ -11,5 +12,6 @@ Vue.directive('textToHtml', textToHtml) // used as text-to-html attribute
 new Vue({
   router,
   store,
+  vuetify,
   render: (h) => h(App),
 }).$mount('#app')

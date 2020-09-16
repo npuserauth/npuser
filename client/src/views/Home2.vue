@@ -14,34 +14,27 @@
     section(class="no-container features features-dark")
       ed-ehr-values
 
-    section(class="container features features-light")
-      div(class="content")
-        h2(class="title") {{ appText.underDevelopment.title }}
-        div(v-text-to-html.noAutoLink="appText.underDevelopment.body")
-
-    section(class="container features features-dark", id="resources")
-      div(class="content")
-        h2(class="title") {{ appText.resources.title }}
-        div(v-text-to-html.noAutoLink="appText.resources.body")
-
-    section(class="container features features-light")
-      div(class="content")
-        h2(class="title") {{appText.related.title }}
-        div(v-text-to-html.noAutoLink="appText.related.body")
-
-    div(class="is-pulled-right")
-      input(type="checkbox", v-model="activateDemoMode")
-
-
 </template>
 
 <script>
 import EdEhrValues from '../components/NpValues.vue'
 import { appText } from '@/appText'
 
+/*
+    section(class="container features features-light")
+      div(class="content")
+        h2(class="title") {{ appText.underDevelopment.title }}
+        div(v-text-to-html.noAutoLink="appText.underDevelopment.body")
+
+ */
 export default {
   components: {
     EdEhrValues,
+  },
+  data () {
+    return {
+      appText,
+    }
   },
 }
 </script>

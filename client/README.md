@@ -34,3 +34,11 @@ npm run test:e2e
 ```
 npm run test:unit
 ```
+
+## Customizations
+
+JS hints 
+
+```
+vue add vuetify
+```
