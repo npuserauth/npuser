@@ -15,11 +15,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ../site:/home/caddy/public_html
-      - ../caddy/caddy_data:/data
-      - ../caddy:/config
-      - ../site:/usr/share/caddy
-      - ../caddy/Caddyfile:/etc/Caddyfile
+      - ../site:/var/www
+      - ../log:/var/log
+      - ../caddy/Caddyfile:/etc/caddy/Caddyfile
       - ../caddy/caddy_data:/data
       - ../caddy/caddy_config:/config
-        caddy caddy file-server --domain npuser.memsharp.com
