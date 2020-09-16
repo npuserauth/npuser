@@ -1,7 +1,10 @@
-npuser.memsharp.com
+npuser.ravensoak.ca
 
-root * /usr/share/caddy
+root * /var/www
+
+file_server
 
 log {
-    level DEBUG
+    output file /var/log/caddy.log
+    format json
 }
