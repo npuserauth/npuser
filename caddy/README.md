@@ -38,3 +38,6 @@ Use Vue cli to generate sample vue. Run build and copy contents of dist to this 
 rsync -r -e 'ssh -p 8022' * npuser@165.227.37.212:/home/npuser/npuser/caddy
 
 rerun docker on server and verify can see new Vuew client app.
+
+
+rsync -r -e 'ssh -p 8022' client/dist npuser@165.227.37.212:/home/npuser/npuser/caddy/site

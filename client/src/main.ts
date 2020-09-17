@@ -2,7 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './registerServiceWorker'
+// Do not want a service worker until the app is super stable and released.
+// import './registerServiceWorker'
 import textToHtml from './directives/text-to-html'
 import vuetify from './plugins/vuetify'
 
