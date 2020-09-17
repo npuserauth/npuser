@@ -1,6 +1,7 @@
 /* eslint-disable import/first */
 import dotenv from 'dotenv';
 
+// read .env contents into process.env ... if the file does not exist then load .env.default
 const result = dotenv.config();
 if (result.error) {
   dotenv.config({ path: '.env.default' });
