@@ -76,10 +76,27 @@ git clone https://github.com/bryan-gilbert/docker-express-typescript-boilerplate
 # that repo is a fork of Sidhant Panda's https://github.com/sidhantpanda/docker-express-typescript-boilerplate
 cd server
 rm -Rf .git
+cp .env.default sample.end.default
 printf "#Also see parent folder's .gitignore file\n\n#Ignore server generated directories\ndist\ndata\n" > .gitignore
 git add *
 git add .eslintrc.json .github .gitignore
 npm install -D ts-node
+git commit -m "Add server from Sidhant Prana's boiler plate project"
+
 ```
+
+After the above is complete the boiler plate project will now be incorporated into npuser. To run we need to
+set up the .env file which will not get checked in.
+```
+cp sample.enf.default .env.default
+```
+
+If you run this on a Mac with Docker you will need to add the server/data directory to the list of directories that
+Docker can mount. Open Docker Preferences ...  Resources .. File Sharing.  Add the server data directory
+
+```
+npm run dev
+```
+
 
 [1]: ./NoPasswordUserAuth.png 
