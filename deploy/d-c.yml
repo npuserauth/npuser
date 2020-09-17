@@ -15,8 +15,29 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ../site:/var/www
-      - ../log:/var/log
+      - ../client/dist:/var/www
+      - ../logs/site:/var/log
       - ../caddy/Caddyfile:/etc/caddy/Caddyfile
       - ../caddy/caddy_data:/data
       - ../caddy/caddy_config:/config
+
+  api-server:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    image: api-server
+    restart: unless-stopped
+    depends_on:
+      - mongo_service
+    volumes:
+      - ../logs/api:/logs
+    ports:
+      - '3000:3000'
+
+  mongo_service:
+    image: mongo
+    restart: always
+    volumes:
+      - ./db_data:/data/db
+    ports:
+      - "27017:27017"
