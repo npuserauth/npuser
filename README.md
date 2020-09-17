@@ -69,4 +69,17 @@ http://webpatrika.blogspot.com/2007/04/creating-no-replydomaincom-account-in.htm
  - Use Caddy to get HTTPs and proxy the calls to the service.
  
 
+## starting point for the server
+
+```
+git clone https://github.com/bryan-gilbert/docker-express-typescript-boilerplate server
+# that repo is a fork of Sidhant Panda's https://github.com/sidhantpanda/docker-express-typescript-boilerplate
+cd server
+rm -Rf .git
+printf "#Also see parent folder's .gitignore file\n\n#Ignore server generated directories\ndist\ndata\n" > .gitignore
+git add *
+git add .eslintrc.json .github .gitignore
+npm install -D ts-node
+```
+
 [1]: ./NoPasswordUserAuth.png 

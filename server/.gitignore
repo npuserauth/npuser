@@ -1,0 +1,5 @@
+#Also see parent folder's .gitignore file
+
+#Ignore server generated directories
+dist
+data
