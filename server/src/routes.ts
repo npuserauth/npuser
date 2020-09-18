@@ -3,12 +3,14 @@ import swaggerUi from 'swagger-ui-express';
 import apiSpec from '../openapi.json';
 
 import * as BookController from './controllers/book';
-
+import { accountRoutes } from './account/controller'
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
 };
 
 const router = Router();
+
+accountRoutes(router)
 
 // Book routes
 router.post('/book/add', BookController.add);

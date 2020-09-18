@@ -5,8 +5,8 @@
     "version": "1.0.0",
     "description": "API Service endpoints",
     "contact": {
-      "email": "sidhant@panda.fyi",
-      "name": "Sidhant Panda"
+      "email": "bryan.gilbert@gmail",
+      "name": "Bryan Gilbert"
     }
   },
   "servers": [
@@ -16,36 +16,36 @@
   ],
   "tags": [
     {
-      "name": "book",
-      "description": "Books APIs"
+      "name": "npuser",
+      "description": "No Password User APIs"
     }
   ],
   "paths": {
-    "/book/add": {
+    "/account/add": {
       "post": {
         "tags": [
-          "book"
+          "account"
         ],
-        "summary": "Add a book to the database",
-        "operationId": "book-add",
+        "summary": "Add an account to the database",
+        "operationId": "account-add",
         "requestBody": {
-          "description": "New user signing up",
+          "description": "New account signing up",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DraftBookSchema"
+                "$ref": "#/components/schemas/DraftAccountSchema"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Book was added",
+            "description": "Account was added",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DraftBookSchema"
+                  "$ref": "#/components/schemas/DraftAccountSchema"
                 }
               }
             }
@@ -56,13 +56,13 @@
         }
       }
     },
-    "/book/all": {
+    "/account/all": {
       "get": {
         "tags": [
-          "book"
+          "account"
         ],
-        "summary": "Get all books in database",
-        "operationId": "book-get-all",
+        "summary": "Get all accounts in database",
+        "operationId": "account-get-all",
         "responses": {
           "200": {
             "description": "Search results",
@@ -70,10 +70,10 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "books": {
+                    "accounts": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/BookSchema"
+                        "$ref": "#/components/schemas/AccountSchema"
                       }
                     }
                   }
@@ -87,31 +87,31 @@
         }
       }
     },
-    "/book/search": {
+    "/account/search": {
       "get": {
         "tags": [
-          "book"
+          "account"
         ],
-        "summary": "Search books by name or author",
-        "operationId": "book-search",
+        "summary": "Search accounts by name or apiKey",
+        "operationId": "account-search",
         "parameters": [
           {
             "in": "query",
             "name": "name",
             "schema": {
               "type": "string",
-              "default": "hitchhiker"
+              "default": "Ed EHR"
             },
-            "description": "String containing full name or partial name of the book"
+            "description": "String containing full name or partial name of the account"
           },
           {
             "in": "query",
-            "name": "author",
+            "name": "apiKey",
             "schema": {
               "type": "string",
-              "default": "douglas"
+              "default": "5d7224d3b40b1a1a046697dd"
             },
-            "description": "String containing full name or partial name of the author"
+            "description": "String containing the account apiKey"
           }
         ],
         "responses": {
@@ -121,10 +121,10 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "books": {
+                    "accounts": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/BookSchema"
+                        "$ref": "#/components/schemas/AccountSchema"
                       }
                     }
                   }
@@ -141,23 +141,23 @@
   },
   "components": {
     "schemas": {
-      "DraftBookSchema": {
+      "DraftAccountSchema": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "example": "The Hitchhiker's Guide to the Galaxy"
+            "example": "Ed EHR"
           },
-          "author": {
+          "apiKey": {
             "type": "string",
-            "example": "Douglas Adams"
+            "example": "5d7224d3b40b1a1a046697dd"
           }
         }
       },
-      "BookSchema": {
+      "AccountSchema": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/DraftBookSchema"
+            "$ref": "#/components/schemas/DraftAccountSchema"
           }
         ],
         "type": "object",
