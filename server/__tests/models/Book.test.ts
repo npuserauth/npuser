@@ -1,4 +1,3 @@
-import request from 'supertest';
 import mockingoose from 'mockingoose';
 import app from '../../src/app';
 import BookModel from '../../src/models/Book';
