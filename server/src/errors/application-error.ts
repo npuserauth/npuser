@@ -4,12 +4,12 @@ export default class ApplicationError extends Error {
   public status: number = 500;
 
   constructor(message?: string, status?: number) {
-    super();
+    super()
     if (message != null) {
-      this.message = message;
+      this.message = message
     }
     if (status != null) {
-      this.status = status;
+      this.status = status
     }
   }
 }

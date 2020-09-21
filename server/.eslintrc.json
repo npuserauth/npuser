@@ -54,7 +54,7 @@
       "error",
       "as-needed"
     ],
-    "semi": "error",
+    "semi": ["warn", "never"],
     "no-extra-semi": 0,
     "import/no-unresolved": "off",
     "import/prefer-default-export": 0,
@@ -82,7 +82,7 @@
     ],
     "handle-callback-err": "error",
     "quotes": [
-      "error",
+      "warn",
       "single"
     ]
   },

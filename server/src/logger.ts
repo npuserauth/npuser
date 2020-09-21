@@ -2,7 +2,7 @@ import {
   createLogger,
   format,
   transports
-} from 'winston';
+} from 'winston'
 
 const logTransports = [
   new transports.File({
@@ -14,9 +14,9 @@ const logTransports = [
           return {
             message: (value as Error).message,
             stack: (value as Error).stack
-          };
+          }
         }
-        return value;
+        return value
       }
     })
   }),
@@ -24,7 +24,7 @@ const logTransports = [
     level: 'debug',
     format: format.prettyPrint()
   })
-];
+]
 
 const logger = createLogger({
   format: format.combine(
@@ -32,6 +32,6 @@ const logger = createLogger({
   ),
   transports: logTransports,
   defaultMeta: { service: 'api' }
-});
+})
 
-export default logger;
+export default logger

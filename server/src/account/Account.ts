@@ -1,6 +1,6 @@
 import {
   Document, Model, Schema, model
-} from 'mongoose';
+} from 'mongoose'
 
 export interface IAccount extends Document {
   /** Name of the account */
@@ -14,8 +14,8 @@ interface IAccountModel extends Model<IAccount> { }
 const schema = new Schema({
   name: { type: String, required: true },
   apiKey: { type: String, required: true }
-});
+})
 
-const Account: IAccountModel = model<IAccount, IAccountModel>('Account', schema);
+const Account: IAccountModel = model<IAccount, IAccountModel>('Account', schema)
 
-export default Account;
+export default Account
