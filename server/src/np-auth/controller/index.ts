@@ -5,5 +5,5 @@ const npAuthRoutes = function (router: Router) {
   router.post('/npauth/auth', npAuth)
 }
 export {
-  npAuthRoutes,
+  npAuthRoutes
 }

@@ -4,7 +4,7 @@ import requestMiddleware from '../../middleware/request-middleware'
 
 export const validationSchema = Joi.object().keys({
   userEmail: Joi.string().required(),
-  apiKey: Joi.string().required(),
+  apiKey: Joi.string().required()
 })
 
 const add: RequestHandler = async (req, res) => {
@@ -22,7 +22,7 @@ const add: RequestHandler = async (req, res) => {
 
   res.send({
     message: 'Auth email request sent',
-    token,
+    token
   })
 }
 
