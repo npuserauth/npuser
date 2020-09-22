@@ -22,7 +22,7 @@ const logTransports = [
   }),
   new transports.Console({
     level: 'debug',
-    format: format.prettyPrint()
+    format: format.json()
   })
 ]
 
