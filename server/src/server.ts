@@ -10,39 +10,13 @@ const ehrApp = new EhrApp()
 
 ehrApp.setup(configuration)
   .then(() => {
+    logger.info('Setup done')
     const app = ehrApp.application
     const { serverPort } = configuration
     app.listen(serverPort, () => {
       logger.info(`Server running... ${serverPort}`)
     })
   })
-// read .env contents into process.env ... if the file does not exist then load .env.default
-// const result = dotenv.config()
-// if (result.error) {
-//   dotenv.config({ path: '.env.default' })
-// }
-
-// import app from './app'
-// import MongoConnection from './mongo-connection'
-
-// const mongoConnection = new MongoConnection(process.env.MONGO_URL)
-//
-// if (process.env.MONGO_URL == null) {
-//   logger.log({
-//     level: 'error',
-//     message: 'MONGO_URL not specified in environment'
-//   })
-//   process.exit(1)
-// } else {
-//   mongoConnection.connect(() => {
-//     app.listen(app.get('port'), (): void => {
-//       console.log(`Express server started at http://localhost:${app.get('port')}`)
-//       if (process.env.NODE_ENV === 'development') {
-//         console.log(`Swagger UI hosted at http://localhost:${app.get('port')}/dev/api-docs`)
-//       }
-//     })
-//   })
-// }
 
 // Close the Mongoose connection, when receiving SIGINT
 process.on('SIGINT', () => {

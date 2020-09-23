@@ -1,7 +1,6 @@
 // @ts-ignore
 import request from 'supertest';
 import app from '../../src/app';
-import mockingoose from 'mockingoose';
 import Account from '../../src/account/Account';
 
 describe('test mongoose account model', () => {
@@ -11,8 +10,6 @@ describe('test mongoose account model', () => {
       name: 'name',
       apiKey: 'asdasd'
     };
-
-    mockingoose(Account).toReturn(returnValue, 'findOne');
 
     return Account.findById({ _id: '507f191e810c19729de860ea' }).then(doc => {
       expect(JSON.parse(JSON.stringify(doc))).toMatchObject(returnValue);

@@ -1,21 +1,29 @@
-import {
-  Document, Model, Schema, model
-} from 'mongoose'
-
-export interface IAccount extends Document {
-  /** Name of the account */
+export interface IAccount {
   name: string;
-  /** client key of the account */
   apiKey: string;
 }
 
-interface IAccountModel extends Model<IAccount> { }
+class Account implements IAccount {
+  static find(query?: string) {
+    throw new Error('Method not implemented.')
+  }
 
-const schema = new Schema({
-  name: { type: String, required: true },
-  apiKey: { type: String, required: true }
-})
+  toJSON() {
+    throw new Error('Method not implemented.')
+  }
 
-const Account: IAccountModel = model<IAccount, IAccountModel>('Account', schema)
+  save() {
+    throw new Error('Method not implemented.')
+  }
+
+  apiKey: string;
+
+  name: string;
+
+  constructor(name: string, apiKey: string) {
+    this.name = name
+    this.apiKey = apiKey
+  }
+}
 
 export default Account

@@ -10,7 +10,4 @@ describe('App Test', () => {
       .expect(404, done);
   });
 
-  test('GET /book/all should return 200', done => {
-    request(app).get('/book/all').expect(200, done);
-  });
 });

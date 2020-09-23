@@ -1,16 +1,13 @@
 import {
-  Router, Request, Response, ErrorRequestHandler, NextFunction, Express
+  Express, NextFunction, Request, Response, Router
 } from 'express'
-
-// @ts-ignore
-import moment from 'moment'
-// @ts-ignore
 import cors from 'cors'
+import { IFileDb } from './db-local'
+// @ts-ignore
+// @ts-ignore
 import logger from './logger'
 import { IConfig } from './config/config'
 import AuthController from './np-auth/auth-controller'
-
-const authC = new AuthController()
 
 function setupCors(config: IConfig) {
   const whitelist: string[] = [] // 'http://localhost:28000', 'http://localhost:27000']
@@ -18,20 +15,22 @@ function setupCors(config: IConfig) {
   whitelist.push(config.apiUrl)
   logger.info('Setup CORS with whitelist:', whitelist)
 
-  type CorsCallback = (err: Error, options: any) => void;
-  const corsOptionsDelegate = function (req: Request, callback: CorsCallback) {
-    let corsOptions
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
-      corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    } else {
-      corsOptions = { origin: false } // disable CORS for this request
+    type CorsCallback = (err: Error, options: any) => void;
+    const corsOptionsDelegate = function (req: Request, callback: CorsCallback) {
+      let corsOptions
+      if (whitelist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+      } else {
+        corsOptions = { origin: false } // disable CORS for this request
+      }
+      callback(null, corsOptions) // callback expects two parameters: error and options
     }
-    callback(null, corsOptions) // callback expects two parameters: error and options
-  }
-  return corsOptionsDelegate
+    return corsOptionsDelegate
 }
 
-export function apiMiddle(app: Express, config: IConfig) {
+export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
+  const authC = new AuthController(connection)
+
   // if (config.traceApiCalls) {
   app.use((req: Request, res: Response, next: NextFunction) => {
     logger.info(`${req.method} ${req.url}`)
@@ -78,5 +77,6 @@ export function apiError(app: Express, config: IConfig) {
     logger.error(`EdEHR server error name: "${err.name}" message: "${err.message}" on path: ${req.path}`)
     next(err)
   }
+
   app.use(logErrors)
 }

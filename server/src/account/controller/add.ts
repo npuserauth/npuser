@@ -11,7 +11,7 @@ export const addAccountSchema = Joi.object().keys({
 const add: RequestHandler = async (req, res) => {
   const { name, apiKey } = req.body
 
-  const account = new Account({ name, apiKey })
+  const account = new Account(name, apiKey)
   await account.save()
 
   res.send({
