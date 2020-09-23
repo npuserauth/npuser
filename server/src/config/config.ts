@@ -3,6 +3,7 @@ import path from 'path'
 import logger from '../logger'
 
 export interface IConfig {
+  authTokenSecret: string;
   apiUrl: string;
   clientUrl: string;
   env: string

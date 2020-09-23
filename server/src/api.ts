@@ -3,11 +3,11 @@ import {
 } from 'express'
 import cors from 'cors'
 import { IFileDb } from './db-local'
-// @ts-ignore
-// @ts-ignore
 import logger from './logger'
 import { IConfig } from './config/config'
+import AuthUtil, { IAuthUtil } from './helpers/auth-util'
 import AuthController from './np-auth/auth-controller'
+import ApiUserController from './api-user/api-user-controller'
 
 function setupCors(config: IConfig) {
   const whitelist: string[] = [] // 'http://localhost:28000', 'http://localhost:27000']
@@ -29,7 +29,10 @@ function setupCors(config: IConfig) {
 }
 
 export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
+  const corsOptions = setupCors(config)
+  const authUtil: IAuthUtil = new AuthUtil(config)
   const authC = new AuthController(connection)
+  const apiUser = new ApiUserController(connection, authUtil)
 
   // if (config.traceApiCalls) {
   app.use((req: Request, res: Response, next: NextFunction) => {
@@ -38,8 +41,6 @@ export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
   })
   // }
 
-  const corsOptions = setupCors(config)
-  // const authUtil = new AuthUtil(config)
   // const admin = new AdminController(authUtil)
 
   const middleWare = [
@@ -67,6 +68,7 @@ export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
       // for local and dev only
       // api.use('/integrations', adminMiddleware, ic.route())
       api.use('/users', middleWare, authC.route())
+      api.use('/apiuser', middleWare, apiUser.route())
       return api
     })
 }
