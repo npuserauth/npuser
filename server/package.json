@@ -22,6 +22,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
     "dev": "./scripts/dev.sh",
     "start": "node dist/src/server.js",
+    "start:dev": "NODE_ENV=development nodemon -L  node src/server.ts",
     "prod:run": "cp .env.prod .env && docker-compose -f d-c-api.yml -f d-c-mongo.yml up --build",
     "test": "jest",
     "fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"

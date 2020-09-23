@@ -1,6 +1,6 @@
 // import { adminLimiter } from '../helpers/middleware'
 // import { Text } from '../text'
-// import logger from "../logger";
+import logger from "../logger";
 // import jwt  from 'jsonwebtoken'
 import { RequestHandler, Router } from 'express'
 import Joi from '@hapi/joi'
@@ -11,11 +11,17 @@ export const validationSchema = Joi.object().keys({
   apiKey: Joi.string().required()
 })
 
+const authGet: RequestHandler = async (req, res) => {
+  logger.info('Rcv get request ')
+  res.status(200).send({
+    message: 'Auth email request sent'
+    // token
+  })
+}
 const userAuth: RequestHandler = async (req, res) => {
   const { email, apiKey } = req.body
 
   // Generate a verification code
-
   // Compose email body
 
   //  Send email to user
@@ -38,6 +44,7 @@ export default class AuthController {
   route() {
     const router: Router = Router()
     router.post('/auth', requestMiddleware(userAuth, { validation: { body: validationSchema } }))
+    router.get('/auth', requestMiddleware(authGet, { validation: { params: validationSchema } }))
     return router
   }
 }

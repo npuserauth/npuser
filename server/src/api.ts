@@ -34,7 +34,7 @@ function setupCors(config: IConfig) {
 export function apiMiddle(app: Express, config: IConfig) {
   // if (config.traceApiCalls) {
   app.use((req: Request, res: Response, next: NextFunction) => {
-    logger.info(moment().format('YYYY/MM/DD, h:mm:ss.SSS a'), req.method, ' Url:', req.url)
+    logger.info(`${req.method} ${req.url}`)
     next()
   })
   // }

@@ -9,7 +9,7 @@ const TITLE = pkg.title
 const DESCRIPTION = pkg.description
 // provide defaults for development.  Override for production.
 // server port is the port the node js app listens on
-const SERVER_PORT = process.env.SERVER_PORT || 27000
+const SERVER_PORT = process.env.SERVER_PORT || 27001
 //api port is the port number, if any, to use when constructing the API url
 const API_PORT = process.env.API_PORT || undefined // 2700
 const CLIENT_PORT = process.env.CLIENT_PORT || undefined // 28000
