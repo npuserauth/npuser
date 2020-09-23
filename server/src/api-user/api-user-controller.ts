@@ -13,8 +13,12 @@ This controller lets users register with NPUser.
 Post email address - return JWT
 
 User checks email for verification code  which leads to post 2: email address and verification code
-
  */
+type ITokenA = {
+  email: string;
+  vcode: string;
+}
+
 export default class ApiUserController {
     validationSchema = Joi.object().keys({
       userEmail: Joi.string().required()
@@ -68,20 +72,28 @@ export default class ApiUserController {
   }
 
   userValidate: RequestHandler = async (req, res) => {
-    const { jwt, code } = req.body
-    let d = {}
-    console.log('api user validate ', jwt, code)
     try {
-      d = this.authUtil.validateToken(jwt)
-      console.log('api user validated? ', d)
+      const { jwt, code } = req.body
+      const originalData: ITokenA = this.authUtil.validateToken(jwt) as ITokenA
+      if (code === originalData.vcode) {
+        const payload = { email: originalData.email, todo: 'can add other data here such as current timestamp' }
+        const jwt2 = this.authUtil.createToken(payload)
+        res.send({
+          message: 'User validated',
+          jwt: jwt2
+        })
+      } else {
+        console.log('invalid code')
+        res.status(400).send({
+          message: 'Not valid'
+        })
+      }
     } catch (validationError) {
-      console.log(validationError.message)
-      console.log('not valid')
+      console.log('ERROR', validationError.message)
+      res.status(400).send({
+        message: 'Error in validate'
+      })
     }
-
-    res.send({
-      message: `User validate? ${JSON.stringify(d)}`
-    })
   }
 
   route() {

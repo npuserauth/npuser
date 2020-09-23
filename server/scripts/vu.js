@@ -27,11 +27,18 @@ async function sendAuth() {
     method: 'POST'
   }
   const d = await send(opts, { email: 'b.g@c.c' })
-  console.log('sent auth got: ', d)
+  // console.log('sent auth got: ', d)
+
+  // Take the results and extract the jwt. Also get the for-dev-only vcode.
+  // Send the jwt and vcode (which will eventually be provided by the user reading their email)
+  // To invalidate the request send a bogus v code
+  // d.vcode = 'ddd'
+  const validatePayload = { jwt: d.jwt, code: d.vcode }
+  // console.log('send validation payload', validatePayload)
   const opts2 = Object.assign(opts)
   opts2.path = '/apiuser/validate'
-  const v = await send(opts2, d)
-  console.log('sent validate got: ', v)
+  const v = await send(opts2, validatePayload)
+  // console.log('sent validate got: ', v)
   return v
 }
 async function f1() {
