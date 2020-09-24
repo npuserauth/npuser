@@ -1,6 +1,6 @@
 // import { adminLimiter } from '../helpers/middleware'
 // import { Text } from '../text'
-// import jwt  from 'jsonwebtoken'
+import jwt  from 'jsonwebtoken'
 import { RequestHandler, Router } from 'express'
 import Joi from '@hapi/joi'
 import logger from '../logger'
@@ -18,6 +18,11 @@ type ITokenA = {
   email: string;
   vcode: string;
 }
+type IAuth = {
+  email: string;
+}
+
+type npPacket = {clientId: string, data: string}
 
 export default class ApiUserController {
     validationSchema = Joi.object().keys({
@@ -48,10 +53,23 @@ export default class ApiUserController {
     return Math.floor(Math.random() * mul) + adr
   };
 
+
+  unpackRequest(reqBody: npPacket) {
+    console.log('unpackreqBody body ', reqBody)
+    const {clientId, data} = reqBody
+    console.log('\nunpackreqBody clientId', clientId, '\n')
+    console.log('\nunpackreqBody data', data, '\n')
+    const unpacked = jwt.verify(data, 'sssh')
+    console.log('\nunpackreqBody unpacked', unpacked, '\n')
+
+    return unpacked
+  }
   userAuth: RequestHandler = async (req, res) => {
     // set to expire in 1 minute
     const TOKEN_EXPIRES_IN = '1m'
-    const { email } = req.body
+    console.log('userAuth req.body', req.body)
+    const { email } = this.unpackRequest(req.body) as IAuth
+    console.log('userAuth email: ', email)
     // Generate a verification code
     const vcode = this.generateNDigits()
     const payload = { email, vcode }
@@ -73,6 +91,7 @@ export default class ApiUserController {
 
   userValidate: RequestHandler = async (req, res) => {
     try {
+      console.log('userValidate req.body', req.body)
       const { jwt, code } = req.body
       const originalData: ITokenA = this.authUtil.validateToken(jwt) as ITokenA
       if (code === originalData.vcode) {

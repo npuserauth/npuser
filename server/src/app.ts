@@ -52,6 +52,7 @@ export default class EhrApp {
       if (res.headersSent) {
         return next(err)
       }
+      logger.info('Error handler', err)
       return res.status(err.status || 500).json({
         error: process.env.NODE_ENV === 'development' ? err : undefined,
         message: err.message

@@ -76,7 +76,7 @@ export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
 export function apiError(app: Express, config: IConfig) {
   // error handlers
   function logErrors(err: Error, req: Request, res: Response, next: NextFunction) {
-    logger.error(`EdEHR server error name: "${err.name}" message: "${err.message}" on path: ${req.path}`)
+    logger.error(`NP User server error name: "${err.name}" message: "${err.message}" on path: ${req.path}`)
     next(err)
   }
 
