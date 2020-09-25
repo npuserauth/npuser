@@ -1,10 +1,10 @@
 const http = require('http')
-const jwt  =require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 function signPayload(payload) {
   let t = JSON.stringify(payload)
-  t = jwt.sign(payload,"sssh")
-  const signed = {clientId:'somekey', data: t}
+  t = jwt.sign(payload, 'sssh')
+  const signed = { clientId: 'somekey', data: t }
   return JSON.stringify(signed)
 }
 
@@ -41,7 +41,7 @@ async function sendAuth() {
   // Send the jwt and vcode (which will eventually be provided by the user reading their email)
   // To invalidate the request send a bogus v code
   // d.vcode = 'ddd'
-  const validatePayload = { jwt: d.jwt, code: d.vcode }
+  const validatePayload = { token: d.jwt, code: d.vcode }
   console.log('send validation payload', validatePayload)
   const opts2 = Object.assign(opts)
   opts2.path = '/apiuser/validate'

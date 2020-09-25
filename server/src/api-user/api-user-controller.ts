@@ -1,6 +1,6 @@
 // import { adminLimiter } from '../helpers/middleware'
 // import { Text } from '../text'
-import jwt  from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import { RequestHandler, Router } from 'express'
 import Joi from '@hapi/joi'
 import logger from '../logger'
@@ -14,13 +14,24 @@ Post email address - return JWT
 
 User checks email for verification code  which leads to post 2: email address and verification code
  */
-type ITokenA = {
+type AuthPayload = {
   email: string;
-  vcode: string;
+  code: string;
 }
-type IAuth = {
+type AuthRequestPacket = {
   email: string;
 }
+type AuthResponsePacket = {
+  message: string;
+  code: string; // only here temporarily for initial development only
+  token: string;
+}
+
+// type IValidated = {
+//   message: string;
+//   vcode: string; // only here temporarily for initial development only
+//   token: string;
+// }
 
 type npPacket = {clientId: string, data: string}
 
@@ -53,10 +64,9 @@ export default class ApiUserController {
     return Math.floor(Math.random() * mul) + adr
   };
 
-
   unpackRequest(reqBody: npPacket) {
     console.log('unpackreqBody body ', reqBody)
-    const {clientId, data} = reqBody
+    const { clientId, data } = reqBody
     console.log('\nunpackreqBody clientId', clientId, '\n')
     console.log('\nunpackreqBody data', data, '\n')
     const unpacked = jwt.verify(data, 'sssh')
@@ -64,36 +74,35 @@ export default class ApiUserController {
 
     return unpacked
   }
+
   userAuth: RequestHandler = async (req, res) => {
-    // set to expire in 1 minute
-    const TOKEN_EXPIRES_IN = '1m'
-    console.log('userAuth req.body', req.body)
-    const { email } = this.unpackRequest(req.body) as IAuth
+    const { email } = this.unpackRequest(req.body) as AuthRequestPacket
     console.log('userAuth email: ', email)
     // Generate a verification code
-    const vcode = this.generateNDigits()
-    const payload = { email, vcode }
+    const vcode = this.generateNDigits().toString()
+    const payload:AuthPayload = { email, code: vcode }
     // Create token for validation.
     // TODO Encrypt it.
-    const jwt: string = this.authUtil.createToken(payload, { expiresIn: TOKEN_EXPIRES_IN })
-    const d: object = this.authUtil.validateToken(jwt)
+    const TOKEN_EXPIRES_IN = '1m'
+    const jwtToken: string = this.authUtil.createToken(payload, { expiresIn: TOKEN_EXPIRES_IN })
+    const d: object = this.authUtil.validateToken(jwtToken)
 
-    console.log('api user post ', vcode, email, jwt, d)
+    console.log('api user post ', vcode, email, jwtToken, d)
     // TODO Compose email body
     //  Send email to user
-
-    res.send({
+    const responsePacket: AuthResponsePacket = {
       message: 'User auth request. TODO send email sent. For dev will return vcode but this will be removed',
-      vcode,
-      jwt
-    })
+      code: vcode,
+      token: jwtToken
+    }
+    res.send(responsePacket)
   }
 
   userValidate: RequestHandler = async (req, res) => {
     try {
       console.log('userValidate req.body', req.body)
-      const { jwt, code } = req.body
-      const originalData: ITokenA = this.authUtil.validateToken(jwt) as ITokenA
+      const { token, code } = req.body
+      const originalData: ITokenA = this.authUtil.validateToken(token) as ITokenA
       if (code === originalData.vcode) {
         const payload = { email: originalData.email, todo: 'can add other data here such as current timestamp' }
         const jwt2 = this.authUtil.createToken(payload)

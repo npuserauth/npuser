@@ -28,6 +28,7 @@
         "null": "ignore"
       }
     ],
+    "no-console": "off",
     "no-underscore-dangle": [
       "error",
       {

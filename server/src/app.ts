@@ -38,7 +38,7 @@ export default class EhrApp {
         logger.info('Setup final middleware')
         return this.setupFinalMiddle()
       })
-      .catch((err) => {
+      .catch(err => {
         logger.error('Db connect error')
       })
   }
