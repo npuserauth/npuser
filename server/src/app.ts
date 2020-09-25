@@ -15,11 +15,11 @@ export default class EhrApp {
 
   private connection: IFileDb;
 
-  constructor() {
+  constructor () {
     this.app = express()
   }
 
-  setup(config: any) {
+  setup (config: any) {
     const { app } = this
     app.use(helmet())
     app.use(compression())
@@ -39,15 +39,15 @@ export default class EhrApp {
         return this.setupFinalMiddle()
       })
       .catch(err => {
-        logger.error('Db connect error')
+        logger.error(`Db connect error ${err.message}`)
       })
   }
 
-  get application(): Express {
+  get application (): Express {
     return this.app
   }
 
-  private setupFinalMiddle() {
+  private setupFinalMiddle () {
     this.app.use((err: ApplicationError, req: Request, res: Response, next: NextFunction) => {
       if (res.headersSent) {
         return next(err)
@@ -61,7 +61,7 @@ export default class EhrApp {
     // apiError(app, config)
   }
 
-  close() {
+  close () {
     return (!this.connection ? Promise.resolve()
       : this.connection.close((err: any) => {
         if (err) {

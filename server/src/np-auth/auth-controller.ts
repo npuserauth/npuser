@@ -15,7 +15,7 @@ export default class AuthController {
 
     private readonly connection: IFileDb;
 
-    constructor(connection: IFileDb) {
+    constructor (connection: IFileDb) {
       this.connection = connection
     }
 
@@ -28,7 +28,7 @@ export default class AuthController {
     }
 
     userAuth: RequestHandler = async (req, res) => {
-      const { email, apiKey } = req.body
+      // const { email, apiKey } = req.body
 
       // Generate a verification code
       // Compose email body
@@ -45,7 +45,7 @@ export default class AuthController {
       })
     }
 
-    route() {
+    route () {
       const router: Router = Router()
       router.post('/auth', requestMiddleware(this.userAuth, { validation: { body: this.validationSchema } }))
       router.get('/auth', requestMiddleware(this.authGet, { validation: { params: this.validationSchema } }))

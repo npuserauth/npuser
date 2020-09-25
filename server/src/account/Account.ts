@@ -4,15 +4,15 @@ export interface IAccount {
 }
 
 class Account implements IAccount {
-  static find(query?: string) {
+  static find (query?: string) {
     throw new Error('Method not implemented.')
   }
 
-  toJSON() {
+  toJSON () {
     throw new Error('Method not implemented.')
   }
 
-  save() {
+  save () {
     throw new Error('Method not implemented.')
   }
 
@@ -20,7 +20,7 @@ class Account implements IAccount {
 
   name: string;
 
-  constructor(name: string, apiKey: string) {
+  constructor (name: string, apiKey: string) {
     this.name = name
     this.apiKey = apiKey
   }

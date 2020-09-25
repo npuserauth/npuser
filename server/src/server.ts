@@ -1,5 +1,3 @@
-/* eslint-disable import/first */
-import dotenv from 'dotenv'
 import Config, { IConfig } from './config/config'
 import EhrApp from './app'
 import logger from './logger'

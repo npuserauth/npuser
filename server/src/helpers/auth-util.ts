@@ -12,7 +12,7 @@ export interface IAuthUtil {
 export default class AuthUtil implements IAuthUtil {
     private readonly tokenSecret: string;
 
-    constructor(config: IConfig) {
+    constructor (config: IConfig) {
       this.tokenSecret = config.authTokenSecret
     }
 
@@ -27,12 +27,12 @@ export default class AuthUtil implements IAuthUtil {
      * @throws {*} token validation errors from jwt.verify
      *
      */
-    authenticate(token: string) {
+    authenticate (token: string) {
       const sliced = token.replace('Bearer ', '')
       return this.validateToken(sliced)
     }
 
-    createToken(data: any, options?: any): string {
+    createToken (data: any, options?: any): string {
       return jwt.sign(data, this.tokenSecret, options)
     }
 
@@ -50,7 +50,7 @@ export default class AuthUtil implements IAuthUtil {
      * If not, it will throw the error.
      * (See more in https://github.com/auth0/node-jsonwebtoken)
      */
-    validateToken(jwtString: string): any {
+    validateToken (jwtString: string): any {
       const results = jwt.verify(jwtString, this.tokenSecret)
       return results
     }

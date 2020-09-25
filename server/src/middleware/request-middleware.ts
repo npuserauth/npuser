@@ -27,7 +27,7 @@ interface HandlerOptions {
  * @param handler Request handler to check for error
  * @param options
  */
-export const relogRequestHandler = (handler: RequestHandler, options?: HandlerOptions,)
+export const relogRequestHandler = (handler: RequestHandler, options?: HandlerOptions)
     : RequestHandler => async (req: Request, res: Response, next: NextFunction) => {
   if (options?.validation?.body) {
     const { error } = options?.validation?.body.validate(req.body)

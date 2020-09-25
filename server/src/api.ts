@@ -9,7 +9,7 @@ import AuthUtil, { IAuthUtil } from './helpers/auth-util'
 import AuthController from './np-auth/auth-controller'
 import ApiUserController from './api-user/api-user-controller'
 
-function setupCors(config: IConfig) {
+function setupCors (config: IConfig) {
   const whitelist: string[] = [] // 'http://localhost:28000', 'http://localhost:27000']
   whitelist.push(config.clientUrl)
   whitelist.push(config.apiUrl)
@@ -28,7 +28,7 @@ function setupCors(config: IConfig) {
     return corsOptionsDelegate
 }
 
-export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
+export function apiMiddle (app: Express, config: IConfig, connection: IFileDb) {
   const corsOptions = setupCors(config)
   const authUtil: IAuthUtil = new AuthUtil(config)
   const authC = new AuthController(connection)
@@ -47,20 +47,6 @@ export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
     cors(corsOptions)
     // validatorMiddlewareWrapper(authUtil)
   ]
-  const adminMiddleware = [
-    cors(corsOptions)
-    // adminLimiter,
-    // validatorMiddlewareWrapper(authUtil),
-    // isAdmin
-  ]
-
-  const localhostOnlyAdminMiddleware = [
-    cors(corsOptions)
-    // localhostOnly,
-    // // adminLimiter,
-    // validatorMiddlewareWrapper(authUtil),
-    // isAdmin
-  ]
 
   return Promise.resolve()
     .then(() => {
@@ -73,9 +59,9 @@ export function apiMiddle(app: Express, config: IConfig, connection: IFileDb) {
     })
 }
 
-export function apiError(app: Express, config: IConfig) {
+export function apiError (app: Express, config: IConfig) {
   // error handlers
-  function logErrors(err: Error, req: Request, res: Response, next: NextFunction) {
+  function logErrors (err: Error, req: Request, res: Response, next: NextFunction) {
     logger.error(`NP User server error name: "${err.name}" message: "${err.message}" on path: ${req.path}`)
     next(err)
   }

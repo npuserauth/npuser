@@ -28,7 +28,7 @@ export default class Config {
 
   private readonly configuration: IConfig;
 
-  constructor(env: string) {
+  constructor (env: string) {
     this.env = env
     logger.info(`Construct config with env ${env}`)
 
@@ -47,7 +47,7 @@ export default class Config {
     // Merge config files
     // let cfg = Object.assign(defaultConfig, environmentConfig)
 
-    function composeUrl(scheme: string, host: string, port: string, part?: string) {
+    function composeUrl (scheme: string, host: string, port: string, part?: string) {
       return `${scheme}://${host}${port ? `:${port}` : ''}${part ? `/${part}` : ''}`
     }
     let url = composeUrl(cfg.scheme, cfg.clientHost, cfg.clientPort)
@@ -59,12 +59,12 @@ export default class Config {
     logger.info(this.asStringForLog())
   }
 
-  get config(): IConfig {
+  get config (): IConfig {
     // debug('config >> ', this.configuration)
     return this.configuration
   }
 
-  asStringForLog() {
+  asStringForLog () {
     let tmp = {
       authTokenSecret: '',
       database: {
@@ -87,7 +87,7 @@ export default class Config {
   /**
    * Validate NODE_ENV existence
    */
-  validateEnvironmentVariable() {
+  validateEnvironmentVariable () {
     const environmentFiles = glob.sync(`./src/config/${this.env}.js`)
     if (!environmentFiles.length) {
       if (this.env) {

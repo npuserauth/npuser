@@ -23,15 +23,14 @@ type AuthRequestPacket = {
 }
 type AuthResponsePacket = {
   message: string;
-  code: string; // only here temporarily for initial development only
   token: string;
 }
 
-// type IValidated = {
-//   message: string;
-//   vcode: string; // only here temporarily for initial development only
-//   token: string;
-// }
+type ValidateRequestPacket = {
+  email: string;
+  token: string;
+  code: string;
+}
 
 type npPacket = {clientId: string, data: string}
 
@@ -44,7 +43,7 @@ export default class ApiUserController {
 
     private readonly authUtil: IAuthUtil;
 
-    constructor(connection: IFileDb, authUtil: IAuthUtil) {
+    constructor (connection: IFileDb, authUtil: IAuthUtil) {
       this.connection = connection
       this.authUtil = authUtil
     }
@@ -64,14 +63,16 @@ export default class ApiUserController {
     return Math.floor(Math.random() * mul) + adr
   };
 
-  unpackRequest(reqBody: npPacket) {
-    console.log('unpackreqBody body ', reqBody)
+  unpackRequest (reqBody: npPacket) {
+    console.log('unpackRequest body ', reqBody)
     const { clientId, data } = reqBody
-    console.log('\nunpackreqBody clientId', clientId, '\n')
-    console.log('\nunpackreqBody data', data, '\n')
-    const unpacked = jwt.verify(data, 'sssh')
-    console.log('\nunpackreqBody unpacked', unpacked, '\n')
-
+    console.log('unpackRequest clientId', clientId)
+    console.log('unpackRequest data', data)
+    const sharedSecret = 'sssh'
+    // todo look up secret based on client id
+    console.log('unpackRequest shared secret', sharedSecret)
+    const unpacked = jwt.verify(data, sharedSecret)
+    console.log('unpackRequest unpacked', unpacked)
     return unpacked
   }
 
@@ -83,16 +84,15 @@ export default class ApiUserController {
     const payload:AuthPayload = { email, code: vcode }
     // Create token for validation.
     // TODO Encrypt it.
+    // TODO extend expire time to 30 minutes
     const TOKEN_EXPIRES_IN = '1m'
     const jwtToken: string = this.authUtil.createToken(payload, { expiresIn: TOKEN_EXPIRES_IN })
-    const d: object = this.authUtil.validateToken(jwtToken)
-
-    console.log('api user post ', vcode, email, jwtToken, d)
-    // TODO Compose email body
-    //  Send email to user
+    // TODO remove log output of email. this is a no tracking service!
+    logger.info(`useAuth will send ${vcode} to ${email}. TODO remove this output from the logs.`)
+    // TODO Compose email body and send email to user
+    logger.debug('TODO Compose email body and send email to user')
     const responsePacket: AuthResponsePacket = {
-      message: 'User auth request. TODO send email sent. For dev will return vcode but this will be removed',
-      code: vcode,
+      message: 'User auth request',
       token: jwtToken
     }
     res.send(responsePacket)
@@ -101,20 +101,23 @@ export default class ApiUserController {
   userValidate: RequestHandler = async (req, res) => {
     try {
       console.log('userValidate req.body', req.body)
-      const { token, code } = req.body
-      const originalData: ITokenA = this.authUtil.validateToken(token) as ITokenA
-      if (code === originalData.vcode) {
-        const payload = { email: originalData.email, todo: 'can add other data here such as current timestamp' }
-        const jwt2 = this.authUtil.createToken(payload)
-        res.send({
-          message: 'User validated',
-          jwt: jwt2
-        })
-      } else {
-        console.log('invalid code')
-        res.status(400).send({
-          message: 'Not valid'
-        })
+      const { token, code, email } = this.unpackRequest(req.body) as ValidateRequestPacket
+      if (token && code && email) {
+        const authPayload: AuthPayload = this.authUtil.validateToken(token) as AuthPayload
+        if (code === authPayload.code && email === authPayload.email) {
+          // may add more checks to the above but for now the incoming request is validate so return the user token
+          // may not place email address in this packet ... may put a hash of the email address
+          const payload = { email, todo: 'can add other data here such as current timestamp' }
+          const jwt2 = this.authUtil.createToken(payload)
+          res.send({
+            message: 'User validated',
+            jwt: jwt2
+          })
+        } else {
+          res.status(400).send({
+            message: 'Not valid'
+          })
+        }
       }
     } catch (validationError) {
       console.log('ERROR', validationError.message)
@@ -124,7 +127,7 @@ export default class ApiUserController {
     }
   }
 
-  route() {
+  route () {
     const router: Router = Router()
     router.post('/', requestMiddleware(this.userAuth))
     router.post('/validate', requestMiddleware(this.userValidate))
