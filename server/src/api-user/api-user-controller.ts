@@ -68,7 +68,7 @@ export default class ApiUserController {
     const { clientId, data } = reqBody
     console.log('unpackRequest clientId', clientId)
     console.log('unpackRequest data', data)
-    const sharedSecret = 'sssh'
+    const sharedSecret = 'some secret shared with np user'
     // todo look up secret based on client id
     console.log('unpackRequest shared secret', sharedSecret)
     const unpacked = jwt.verify(data, sharedSecret)
