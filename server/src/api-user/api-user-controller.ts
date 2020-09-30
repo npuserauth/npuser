@@ -32,6 +32,15 @@ type ValidateRequestPacket = {
   code: string;
 }
 
+interface AccountKeySecret {
+  [key: string]: string
+}
+
+const tmpAccounts: AccountKeySecret = {
+  client1: 'secret1',
+  client2: 'secret2'
+}
+
 type npPacket = {clientId: string, data: string}
 
 export default class ApiUserController {
@@ -67,8 +76,11 @@ export default class ApiUserController {
     console.log('unpackRequest body ', reqBody)
     const { clientId, data } = reqBody
     console.log('unpackRequest clientId', clientId)
+    // Use the client id to find the shared secret
+    const sharedSecret = tmpAccounts[clientId]
+
     console.log('unpackRequest data', data)
-    const sharedSecret = 'some secret shared with np user'
+    // const sharedSecret = 'some secret shared with np user'
     // todo look up secret based on client id
     console.log('unpackRequest shared secret', sharedSecret)
     const unpacked = jwt.verify(data, sharedSecret)

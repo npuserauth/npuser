@@ -16,7 +16,7 @@ function setupCors (config: IConfig) {
   logger.info('Setup CORS with whitelist:', whitelist)
 
     type CorsCallback = (err: Error, options: any) => void;
-    const corsOptionsDelegate = function (req: Request, callback: CorsCallback) {
+    return function (req: Request, callback: CorsCallback) {
       let corsOptions
       if (whitelist.indexOf(req.header('Origin')) !== -1) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
@@ -25,7 +25,6 @@ function setupCors (config: IConfig) {
       }
       callback(null, corsOptions) // callback expects two parameters: error and options
     }
-    return corsOptionsDelegate
 }
 
 export function apiMiddle (app: Express, config: IConfig, connection: IFileDb) {
@@ -34,25 +33,19 @@ export function apiMiddle (app: Express, config: IConfig, connection: IFileDb) {
   const authC = new AuthController(connection)
   const apiUser = new ApiUserController(connection, authUtil)
 
-  // if (config.traceApiCalls) {
   app.use((req: Request, res: Response, next: NextFunction) => {
     logger.info(`${req.method} ${req.url}`)
     next()
   })
-  // }
-
-  // const admin = new AdminController(authUtil)
 
   const middleWare = [
     cors(corsOptions)
-    // validatorMiddlewareWrapper(authUtil)
   ]
 
   return Promise.resolve()
     .then(() => {
       const api = Router()
       // for local and dev only
-      // api.use('/integrations', adminMiddleware, ic.route())
       api.use('/users', middleWare, authC.route())
       api.use('/apiuser', middleWare, apiUser.route())
       return api
