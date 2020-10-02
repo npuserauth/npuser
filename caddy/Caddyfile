@@ -1,6 +1,6 @@
-npuser.ravensoak.ca
+{$SITE_ADDRESS}
 
-root * /var/www
+root * /usr/share/caddy
 
 file_server
 
