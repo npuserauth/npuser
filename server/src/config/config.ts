@@ -66,19 +66,13 @@ export default class Config {
 
   asStringForLog () {
     let tmp = {
-      authTokenSecret: '',
-      database: {
-        password: ''
-      },
-      cookieSecret: ''
+      authTokenSecret: ''
     }
     try {
       tmp = JSON.parse(JSON.stringify(this.configuration))
     } catch (error) {
       logger.error(`Error cloning configuration ${error}`)
     }
-    tmp.database.password = 'sanitizedFor2'
-    tmp.cookieSecret = 'sanitized cookie secret'
     tmp.authTokenSecret = 'sanitized auth secret'
     // return JSON.stringify(tmp, null, 2)
     return tmp

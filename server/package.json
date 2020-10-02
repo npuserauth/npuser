@@ -1,30 +1,26 @@
 {
   "name": "npuser-server",
   "version": "1.0.0",
-  "description": "No password auth services based on a TypeScript-Express boilerplate",
+  "description": "No password auth services.",
   "repository": {
     "type": "git",
     "url": "git+https:https://github.com/bryan-gilbert/npuser.git"
   },
   "keywords": [
-    "TypeScript",
-    "express",
-    "nodejs",
-    "boilerplate",
-    "eslint"
+    "api",
+    "auth",
+    "authentication",
+    "npuser",
+    "password",
+    "passwordless"
   ],
-  "author": "Sidhant Panda",
-  "main": "dist/index.js",
+  "author": "Bryan Gilbert",
   "scripts": {
-    "eslint": "eslint src/server.ts",
-    "postinstall": "chmod +x ./scripts/dev.sh",
     "build": "tsc",
-    "lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
-    "dev": "./scripts/dev.sh",
-    "start": "node dist/src/server.js",
-    "start:dev": "NODE_ENV=development nodemon -L  node src/server.ts",
-    "prod:run": "cp .env.prod .env && docker-compose -f d-c-api.yml -f d-c-mongo.yml up --build",
+    "start:dev": "NODE_ENV=development nodemon",
+    "start": "NODE_ENV=production ts-node src/server.ts",
     "test": "jest",
+    "lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
     "fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
   },
   "dependencies": {
@@ -51,6 +47,7 @@
     "@types/hapi__joi": "^17.1.5",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "14.0.13",
+    "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
     "eslint": "^7.9.0",
@@ -68,7 +65,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sidhantpanda/docker-express-typescript-boilerplate/issues"
+    "url": "https://github.com/bryan-gilbert/npuser/issues"
   },
-  "homepage": "https://github.com/sidhantpanda/docker-express-typescript-boilerplate#readme"
+  "homepage": "https://npuser.org"
 }

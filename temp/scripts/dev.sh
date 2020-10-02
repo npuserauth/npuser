@@ -2,7 +2,7 @@
 set -e
 
 cleanup() {
-    docker-compose -f  docker-compose.dev.yml down
+    docker-compose -f d-c.dev.yml down
     trap '' EXIT INT TERM
     exit $err
 }
@@ -21,6 +21,6 @@ fi
 #  docker network create entropic >/dev/null
 #fi
 
-COMPOSE_HTTP_TIMEOUT=120 docker-compose -f  docker-compose.dev.yml up -d --force-recreate
+COMPOSE_HTTP_TIMEOUT=120 docker-compose -f d-c.dev.yml up -d --force-recreate
 
 NODE_ENV=development nodemon
