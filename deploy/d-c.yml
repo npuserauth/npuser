@@ -19,3 +19,30 @@ services:
       - ../caddy/Caddyfile:/etc/caddy/Caddyfile
       - ../caddy/caddy_data:/data
       - ../caddy/caddy_config:/config
+
+  npuserserver:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    image: npuserserver
+    hostname: npuserserver
+    environment:
+      - API_HOST
+      - API_PORT
+      - AUTH_TOKEN_SECRET
+      - CLIENT_HOST
+      - CLIENT_PORT
+      - NODE_ENV
+      - PROXY_PASS_HOST
+      - SCHEME
+      - SERVER_PORT
+      - START_ARG
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    restart: unless-stopped
+    volumes:
+      - ../logs/api:/logs
+    entrypoint:
+      - npm
+      - run
+      - ${START_ARG}
