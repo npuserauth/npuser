@@ -38,7 +38,7 @@ services:
       - SERVER_PORT
       - START_ARG
     ports:
-      - ${SERVER_PORT}:${SERVER_PORT}
+      - 27002:27001
     restart: unless-stopped
     volumes:
       - ../logs/api:/logs
