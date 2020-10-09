@@ -8,6 +8,7 @@ import { IConfig } from './config/config'
 import AuthUtil, { IAuthUtil } from './helpers/auth-util'
 import AuthController from './np-auth/auth-controller'
 import ApiUserController from './api-user/api-user-controller'
+import { constructEmailSender, EmailSender } from "./api-user/email-sender";
 
 function setupCors (config: IConfig) {
   const whitelist: string[] = [] // 'http://localhost:28000', 'http://localhost:27000']
@@ -28,25 +29,21 @@ function setupCors (config: IConfig) {
 }
 
 export function apiMiddle (app: Express, config: IConfig, connection: IFileDb) {
-  const corsOptions = setupCors(config)
-  const authUtil: IAuthUtil = new AuthUtil(config)
-  const authC = new AuthController(connection)
-  const apiUser = new ApiUserController(connection, authUtil)
 
   app.use((req: Request, res: Response, next: NextFunction) => {
-    logger.info(`${req.method} ${req.url}`)
+    logger.info(`NPUSER: ${req.method} ${req.url}`)
     next()
   })
 
-  const middleWare = [
-    cors(corsOptions)
-  ]
-
-  return Promise.resolve()
-    .then(() => {
+  return constructEmailSender(config)
+    .then((emailSender) => {
+      const corsOptions = setupCors(config)
+      const middleWare = [
+        cors(corsOptions)
+      ]
+      const authUtil: IAuthUtil = new AuthUtil(config)
+      const apiUser = new ApiUserController(connection, authUtil, emailSender)
       const api = Router()
-      // for local and dev only
-      api.use('/users', middleWare, authC.route())
       api.use('/apiuser', middleWare, apiUser.route())
       return api
     })

@@ -9,6 +9,7 @@ export interface IConfig {
   env: string
   port: number,
   serverPort: number,
+  emailSendMethod: string,
   database: {
     name: string,
     host: string,
@@ -96,12 +97,6 @@ export default class Config {
         })
       }
       this.env = 'development'
-    }
-    const beStrictOnProd = false
-    if (beStrictOnProd && this.env === 'production') {
-      if (!process.env.COOKIE_SECRET) {
-        throw new Error('For production you must set COOKIE_SECRET env ')
-      }
     }
   }
 }

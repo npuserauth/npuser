@@ -7,6 +7,7 @@ import logger from '../logger'
 import requestMiddleware from '../middleware/request-middleware'
 import { IFileDb } from '../db-local'
 import { IAuthUtil } from '../helpers/auth-util'
+import { EmailSender } from "./email-sender";
 
 /*
 This controller lets users register with NPUser.
@@ -51,10 +52,12 @@ export default class ApiUserController {
     private readonly connection: IFileDb;
 
     private readonly authUtil: IAuthUtil;
+    private emailSender: EmailSender;
 
-    constructor (connection: IFileDb, authUtil: IAuthUtil) {
+    constructor(connection: IFileDb, authUtil: IAuthUtil, emailSender: EmailSender) {
       this.connection = connection
       this.authUtil = authUtil
+      this.emailSender = emailSender
     }
 
     userGet: RequestHandler = async (req, res) => {
@@ -82,7 +85,7 @@ export default class ApiUserController {
     console.log('unpackRequest data', data)
     // const sharedSecret = 'some secret shared with np user'
     // todo look up secret based on client id
-    console.log('unpackRequest shared secret', sharedSecret)
+    console.log('unpackRequest shared secret: ', sharedSecret)
     const unpacked = jwt.verify(data, sharedSecret)
     console.log('unpackRequest unpacked', unpacked)
     return unpacked
@@ -102,6 +105,7 @@ export default class ApiUserController {
     // TODO remove log output of email. this is a no tracking service!
     logger.info(`useAuth will send ${vcode} to ${email}. TODO remove this output from the logs.`)
     // TODO Compose email body and send email to user
+    this.emailSender.sendVerificationMail(email, vcode)
     logger.debug('TODO Compose email body and send email to user')
     const responsePacket: AuthResponsePacket = {
       message: 'User auth request',
