@@ -1,0 +1,173 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Service",
+    "version": "1.0.0",
+    "description": "API Service endpoints",
+    "contact": {
+      "email": "bryan.gilbert@gmail",
+      "name": "Bryan Gilbert"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "npuser",
+      "description": "No Password User APIs"
+    }
+  ],
+  "paths": {
+    "/account/add": {
+      "post": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Add an account to the database",
+        "operationId": "account-add",
+        "requestBody": {
+          "description": "New account signing up",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftAccountSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Account was added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DraftAccountSchema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/account/all": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Get all accounts in database",
+        "operationId": "account-get-all",
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accounts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AccountSchema"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/account/search": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Search accounts by name or apiKey",
+        "operationId": "account-search",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string",
+              "default": "Ed EHR"
+            },
+            "description": "String containing full name or partial name of the account"
+          },
+          {
+            "in": "query",
+            "name": "apiKey",
+            "schema": {
+              "type": "string",
+              "default": "5d7224d3b40b1a1a046697dd"
+            },
+            "description": "String containing the account apiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accounts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AccountSchema"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DraftAccountSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ed EHR"
+          },
+          "apiKey": {
+            "type": "string",
+            "example": "5d7224d3b40b1a1a046697dd"
+          }
+        }
+      },
+      "AccountSchema": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DraftAccountSchema"
+          }
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "5d7224d3b40b1a1a046697dd"
+          }
+        }
+      }
+    }
+  }
+}

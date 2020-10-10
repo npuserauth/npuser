@@ -1,0 +1,14 @@
+{$SITE_ADDRESS}
+
+root * /usr/share/caddy
+
+file_server
+
+log {
+    output file /var/log/caddy.log
+    format json
+}
+route /api/* {
+	uri strip_prefix /api
+	reverse_proxy npuserserver:27001
+}

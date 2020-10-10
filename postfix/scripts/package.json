@@ -1,0 +1,11 @@
+{
+  "name": "scripts",
+  "scripts": {
+    "run": "node testmail"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.4.13"
+  }
+}

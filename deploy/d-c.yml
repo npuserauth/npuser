@@ -1,0 +1,48 @@
+version: '3'
+services:
+  caddy:
+    build:
+      context: ../caddy
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV
+      - API_PORT
+      - SITE_ADDRESS
+      - SITE_HTTP_PORT
+    # user: ${CURRENT_UID}
+    ports:
+      - "${SITE_HTTP_PORT}:80"
+      - "443:443"
+    volumes:
+      - ../client/dist:/usr/share/caddy
+      - ../logs/site:/var/log
+      - ../caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ../caddy/caddy_data:/data
+      - ../caddy/caddy_config:/config
+
+  npuserserver:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    image: npuserserver
+    hostname: npuserserver
+    environment:
+      - API_HOST
+      - API_PORT
+      - AUTH_TOKEN_SECRET
+      - CLIENT_HOST
+      - CLIENT_PORT
+      - NODE_ENV
+      - PROXY_PASS_HOST
+      - SCHEME
+      - SERVER_PORT
+      - START_ARG
+    ports:
+      - 27002:27001
+    restart: unless-stopped
+    volumes:
+      - ../logs/api:/logs
+    entrypoint:
+      - npm
+      - run
+      - ${START_ARG}

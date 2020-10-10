@@ -40,7 +40,48 @@ If your client side code stashes the JWT into the user's browser's local storage
 What can a user do if they find their email account has been hacked?  Good question but what is the answer to how can they recover their emails? Not sure what the answer is but this suggests the need to consider a second means of verifying users when the application information is important to users.  npuser is not intended to protect high value personal information.
 
 
+## Some ideas to explore
 
+### No password
+Passwordless and 2FA auth without a database. This library "uses cryptography techniques to generate timestamped tokens, eliminating the need for a database to store tokens. The tokens themselves contain all the information needed to check for their validity."
+https://github.com/sffc/easy-no-password
+
+Downside is the tokens are long and only work if the user is given a link in the email to click. Not clear why a short 6 digit number like Github uses isn't sufficient, in 99.99% of the time (server up time)
+
+
+## Project Planning
+ - The MVP version can read client API keys from a file on the server.
+ - The MVP version may use alternatives to Postfix for sending email.
+ - Use Caddy to get HTTPs and proxy the calls to the service.
+ 
+## starting point for the server
+
+```
+git clone https://github.com/bryan-gilbert/docker-express-typescript-boilerplate server
+# that repo is a fork of Sidhant Panda's https://github.com/sidhantpanda/docker-express-typescript-boilerplate
+cd server
+rm -Rf .git
+cp .env.default sample.end.default
+printf "#Also see parent folder's .gitignore file\n\n#Ignore server generated directories\ndist\ndata\n" > .gitignore
+git add *
+git add .eslintrc.json .github .gitignore
+npm install -D ts-node
+git commit -m "Add server from Sidhant Prana's boiler plate project"
+
+```
+
+After the above is complete the boiler plate project will now be incorporated into npuser. To run we need to
+set up the .env file which will not get checked in.
+```
+cp sample.enf.default .env.default
+```
+
+If you run this on a Mac with Docker you will need to add the server/data directory to the list of directories that
+Docker can mount. Open Docker Preferences ...  Resources .. File Sharing.  Add the server data directory
+
+```
+npm run dev
+```
 
 
 [1]: ./NoPasswordUserAuth.png 
