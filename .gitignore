@@ -24,3 +24,8 @@ node_modules/
 ### macOS ###
 # General
 .DS_Store
+
+#Ignore server generated directories
+dist
+data
+coverage
