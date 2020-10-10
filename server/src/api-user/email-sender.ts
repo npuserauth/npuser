@@ -77,8 +77,26 @@ export class EmailSender {
         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
     }
 
-    sendVerificationMail(email: string, vcode: string) {
+    async sendVerificationMail(toAddress: string, vcode: string) {
+        const fromAddress = 'npuser@npuser.org'
+        const plainTextBody = `verification code ${vcode}`
+        const htmlBody = '<html><head></head>\n' +
+            '  <body>\n' +
+            '    <p>' +
+            `verification code ${vcode}` +
+            '    </p></body></html>'
 
+        let info = await this.transporter.sendMail(
+            {
+            from: fromAddress,
+            to: toAddress,
+            subject: 'Verification code',
+            text: plainTextBody,
+            html: htmlBody
+        });
+
+        console.log("Message sent: %s", info.messageId);
+        console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
     }
 }
 ;
