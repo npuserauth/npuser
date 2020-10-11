@@ -6,9 +6,8 @@ import { IFileDb } from './db-local'
 import logger from './logger'
 import { IConfig } from './config/config'
 import AuthUtil, { IAuthUtil } from './helpers/auth-util'
-import AuthController from './np-auth/auth-controller'
 import ApiUserController from './api-user/api-user-controller'
-import { constructEmailSender, EmailSender } from "./api-user/email-sender";
+import { constructEmailSender } from './api-user/email-sender'
 
 function setupCors (config: IConfig) {
   const whitelist: string[] = [] // 'http://localhost:28000', 'http://localhost:27000']
@@ -29,7 +28,6 @@ function setupCors (config: IConfig) {
 }
 
 export function apiMiddle (app: Express, config: IConfig, connection: IFileDb) {
-
   app.use((req: Request, res: Response, next: NextFunction) => {
     logger.info(`NPUSER: ${req.method} ${req.url}`)
     next()

@@ -7,7 +7,7 @@ import logger from '../logger'
 import requestMiddleware from '../middleware/request-middleware'
 import { IFileDb } from '../db-local'
 import { IAuthUtil } from '../helpers/auth-util'
-import { EmailSender } from "./email-sender";
+import { EmailSender } from './email-sender'
 
 /*
 This controller lets users register with NPUser.
@@ -54,7 +54,7 @@ export default class ApiUserController {
     private readonly authUtil: IAuthUtil;
     private emailSender: EmailSender;
 
-    constructor(connection: IFileDb, authUtil: IAuthUtil, emailSender: EmailSender) {
+    constructor (connection: IFileDb, authUtil: IAuthUtil, emailSender: EmailSender) {
       this.connection = connection
       this.authUtil = authUtil
       this.emailSender = emailSender
