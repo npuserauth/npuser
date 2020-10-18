@@ -21,7 +21,7 @@ users (tan boxes).
 ![1]
 
 
-##Technical details
+## Technical details
 
 npuser allows your application to verify users based on email address.  Your app and npuser will have a shared API key 
 that keeps your users separate from all other applications that use npuser.  
@@ -47,26 +47,6 @@ Your application can match up the two login attempts based on email address.
 Your application may hash this data so that you’re not storing PII (personally identifying information)
 
 
-## Some thoughts ..
-
-What can a user do if they find their email account has been hacked?  
-Good question but what is the answer to how can they recover their emails? 
-Not sure what the answer is but this suggests the need to consider a second means of verifying users when the 
-application information is important to users.  npuser is not intended to protect high value personal information.
-
-
-## Some ideas to explore
-
-### No password
-Passwordless and 2FA auth without a database. This library "uses cryptography techniques to generate timestamped tokens, 
-eliminating the need for a database to store tokens. The tokens themselves contain all the information needed 
-to check for their validity."
-https://github.com/sffc/easy-no-password
-
-Downside is the tokens are long and only work if the user is given a link in the email to click. 
-Not clear why a short 6 digit number like Github uses isn't sufficient, in 99.99% of the time (server up time)
-
-
 ## Project Planning and Status
 
 See related projects:
@@ -82,7 +62,9 @@ authorization, generation of the verification code and subsequent validation.
 Next:
 - link npuser to make the local web service call to npuser-sendmail to send the email with the validation code.
  
-## starting point for the server
+## Notes
+
+The following describes the steps used to create the server sub-project with Typescript, webpack, babel and lint.
 
 ```
 git clone https://github.com/bryan-gilbert/docker-express-typescript-boilerplate server
