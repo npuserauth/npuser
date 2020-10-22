@@ -1,0 +1,35 @@
+/*
+Import the SCSS definitions.  Theses definitions are imported into
+other components, as needed.  Because the definitions are just variables
+and mixins there is no CSS code bloat.
+ */
+@import '../scss/definitions';
+
+/* *****
+Import styles
+ */
+@import '../scss/styles/typography';
+@import '../scss/styles/parr';
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #DDEEFF;
+}
