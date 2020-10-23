@@ -1,16 +1,33 @@
-# npuser
+# npuser pronounced "n.p.user"
 
-> No password user authentication 
+![5]
 
-Add user authentication into your application without the worry of password security.
+> npuser === no password user authentication 
+
+With npuser you can easily add user authentication into your applications and give your users
 
 - quick and painless authentication
-- no password
-- no tracking of user on the authentication server
-- no ability to track user activities across applications
-- open source
+- no password risks
+- no tracking on the authentication server
+- no tracking of user activities across applications
+- open source 
 
 Note that npuser is not intended to protect high value personal information, such as bank accounts.  Instead, it is intended for general use for things like comments on blogs or other simple user services. 
+
+# Why npuser?
+
+To protect ourselves we need different strong passwords for all our applications.  Few users understand how to install and use a common password safe. 
+
+![3]
+
+An alternative, _if the applications support it_ is Single Sign On (SSO).  As a user this makes it easier to manage but you need a really strong password for SSO and all your applications are immediately vulnerable if your SSO account is breach. SSO requires you, as a user, to visit the SSO website and allow this service to track all your login activities. 
+
+![2]
+
+Or your application can join the trend toward using "no password" authentication.  With npauth there is no password to remember and your activities are not tracked by the authentication service. As a user your browser activity stays with the application you use and is never transferred to the authentication service.
+
+![4]
+
 
 ## Authentication Flow
 
@@ -94,4 +111,8 @@ npm run dev
 ```
 
 
-[1]: ./NoPasswordUserAuth.png 
+[1]: ./client/src/assets/NoPasswordUserAuth.png
+[2]: ./client/src/assets/SSO.png
+[3]: ./client/src/assets/passwords.png
+[4]: ./client/src/assets/n.p.user.png
+[5]: ./client/src/assets/npauth-icon.png

@@ -1,0 +1,69 @@
+
+  .mypage {
+    font-family: "Avenir Next", "Avenir", sans-serif !important;
+    position: relative;
+    padding: 0;
+    margin: 0 10px 0 10px;
+  }
+
+  .mycontent {
+    position: absolute;
+    border: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    padding: 20px;
+    margin: 0;
+    overflow: auto;
+  }
+
+  .container1 {
+    background-image: url("https://images.unsplash.com/photo-1587321081101-3fa677fa4683");
+  }
+
+  .container3 {
+    background-image: url("https://images.unsplash.com/photo-1565527891925-f773aae06005");
+  }
+
+
+  .mycontainer {
+    /* parallax scrolling effect */
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: grey;
+  }
+
+  .mycontainer:before {
+    content: "";
+    position: absolute;
+    border: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    background: #eee;
+    opacity: 0.4;
+  }
+
+  .middle {
+  }
+
+  .cardColor {
+     background-color: rgba(255, 255, 255, 0.4) !important;
+    // background-color: rgba(0, 0, 0, 0.4) !important;
+    //background-color: rgba(0, 0, 0, 0.3) !important;
+    // background-color: rgba(255, 255, 255, 0.1) !important;
+    margin-bottom: 4rem;
+  }
+
+  .mycontent {
+    color: #22262e;
+    font-size: 1.5rem;
+  }
+

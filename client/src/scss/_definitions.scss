@@ -22,33 +22,3 @@ $green: #8dd03e;
 $blue: #3396FF;
 
 $error: $red;
-/* ****************** TYPOGRAPHY ****************** */
-
-$bodyFontFamily: 'Aventir', sans-serif;
-$bodyFontSize: 16px;
-
-/* ****************** DIMENSIONS ****************** */
-
-$mediaQueryIpadLandscape: "only screen and (max-width : 1024px)";
-$mediaQueryIpadPortrait: "only screen and (max-width : 768px)";
-
-$contentMinHeight: 700px;
-
-$pageWidthSmallest: 768px;
-
-/* ****************** WRAPPER ****************** */
-
-$o-wrapper-sizes: (
-  page:   1400px,
-  content:  1024px,
-  wide:   682px,
-  narrow: 342px,
-);
-
-@mixin wrapper($size: page) {
-  //margin-right: auto;
-  //margin-left: auto;
-  padding-right: 0;
-  padding-left: 0;
-  max-width: map-get($o-wrapper-sizes, $size);
-}

@@ -1,21 +1,22 @@
 <template lang="pug">
   v-app
-    v-app-bar(app, color="primary", dark)
-      div(class="d-flex align-center")
-        div No Password User Authentication
-      v-spacer
-    v-main
-      router-view
+    app-bar
+    v-main(id="main")
+      v-container(fluid)
+        router-view
+    v-footer(app)
+      div Footer content
+
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+  import AppBar from './components/AppBar.vue'
 
-export default Vue.extend({
-  name: 'App',
-
-  data: () => ({
-    //
-  }),
-})
+  export default {
+    name: 'App',
+    components: {AppBar},
+    data: () => ({
+      //
+    }),
+  }
 </script>

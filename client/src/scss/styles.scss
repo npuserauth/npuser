@@ -6,30 +6,39 @@ and mixins there is no CSS code bloat.
 @import '../scss/definitions';
 
 /* *****
-Import styles
- */
 @import '../scss/styles/typography';
-@import '../scss/styles/parr';
+ */
 
+//@import '../scss/styles/home';
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Avenir Next", "Avenir", sans-serif;
+$heading-font-family: 'Arial';
+$font-size-root: 18px;
+
+/* ****************** TYPOGRAPHY ****************** */
+
+/*
+https://stackoverflow.com/questions/63555360/how-to-override-fonts-in-vuetify-2-with-vue-cli-3
+https://github.com/vuetifyjs/vuetify/issues/8169
+ */
+$body-font-family: 'Aventir', sans-serif;
+//$body-font-family: 'Arial';
+//$body-font-family: 'Montserrat';
+
+.v-application {
+  .display-1,
+  .display-2,
+  .display-3,
+  .display-4,
+  .headline,
+  .title,
+  .subtitle-1,
+  .subtitle-2,
+  .body-1,
+  .body-2,
+  .caption,
+  .overline {
+    font-family: $body-font-family !important;
+  }
+  font-family: $body-font-family !important;
 }
 
-body,
-html {
-  height: 100%;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-  color: #DDEEFF;
-}
