@@ -1,48 +1,3 @@
-<template lang="pug">
-  div(class="outside-view home")
-
-    section(class="hero is-info is-medium is-bold")
-      div(class="hero-body")
-        div(class="container has-text-centered")
-          h1(class="title") {{ appText.heroText.title }}
-          h2(class="subtitle") {{ appText.heroText.subTitle }}
-          demo-access(class="demo-access")
-
-    section(class="container features features-light")
-      div(class="content", v-text-to-html.noAutoLink="appText.heroText.introText")
-
-    section(class="no-container features features-dark")
-      ed-ehr-values
-
-</template>
-
-<script>
-import EdEhrValues from '../components/NpValues.vue'
-import { appText } from '@/appText'
-
-/*
-    section(class="container features features-light")
-      div(class="content")
-        h2(class="title") {{ appText.underDevelopment.title }}
-        div(v-text-to-html.noAutoLink="appText.underDevelopment.body")
-
- */
-export default {
-  components: {
-    EdEhrValues,
-  },
-  data () {
-    return {
-      appText,
-    }
-  },
-}
-</script>
-
-
-<style lang="scss" scoped>
-/* @import '../../scss/definitions';
- */
 
 .content {
   font-size: 1.2rem;
@@ -98,6 +53,3 @@ export default {
     margin-top: 5rem;
   }
 }
-
-</style>
-
