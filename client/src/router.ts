@@ -28,13 +28,13 @@ export default new Router({
     /*
       Support scroll to # hash for the home page. See NP-User-Home.vue
      */
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior (to, from, savedPosition) {
       if (to.hash) {
         return {
           selector: to.hash,
-          offset: { x: 0, y: 40 }
+          offset: { x: 0, y: 40 },
         }
       }
-    }
-  }
+    },
+  },
 )

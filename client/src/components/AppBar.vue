@@ -3,12 +3,11 @@
     //v-app-bar-nav-icon
     v-toolbar-title {{appText.appTitle}}
     v-spacer
-    router-link(to="/#npuser", class="rlink") {{appText.topLinks.why}}
-    router-link(to="/#sso", class="rlink") {{appText.topLinks.alternatives}}
-    router-link(to="/#start", class="rlink") {{appText.topLinks.start}}
+    router-link(v-for="(lk, index) in appText.topLinks", :key="index", :to="lk.hash", class="rlink") {{lk.text}}
 
 </template>
 <!--
+:to=`/#${lk.hash}`,
 The scroll to hash depends on the scrollBehavior inside router.ts
 -->
 <!--

@@ -1,12 +1,21 @@
 /* eslint-disable quote-props,quotes */
 
 export const appText = {
-  "appTitle": "npuser === No Password User Authentication",
-  "topLinks": {
-    "why": "Why npuser?",
-    "alternatives": "Alternatives",
-    "start": "Get started"
-  },
+  "appTitle": "npuser",
+  "topLinks": [
+    {
+      'hash': '#npuser-how',
+      'text': 'How does it work?',
+    },
+    {
+      'hash': '#sso',
+      'text': 'Alternatives',
+    },
+    {
+      'hash': '#start',
+      'text': 'Get Started',
+    },
+  ],
   "hero": {
     "title": 'n.p.user',
     "subTitle": "No password user authentication",
@@ -18,6 +27,26 @@ export const appText = {
       "- user privacy protected across applications\n" +
       "- open source"
   },
+  "npuserHow": [
+    {
+      title: 'Login',
+      imgSrc: 'AppLocked.png',
+      imgAlt: 'Application locked',
+      body: 'Your user wants to try out and access your application. It\'s simple. Just enter an email address. That\'s it. <ul> <li>No need to create an account.</li><li>No security questions.</li><li>No password strength checking</li> <li>No need for \'Forgot your password?\'</li><li>Etc. It\'s hard for new users!</li> \n Have you ever considered how often potential customers don\'t get past this first step because of password fatigue?'
+    },
+    {
+      title: 'nupser',
+      imgSrc: 'AppAsksNpuser.png',
+      imgAlt: 'Ask npuser',
+      body: 'You application sends an encrypted web message to npuser.  Note that unlike other authorization systems like Single Sign On or OAuth your user\'s experience stays on your web application.  npuser decrypts your message using a shared secret that was set up before.  npuser now generates a simple code and sends an email to your user.'
+    },
+    {
+      title: 'Granted',
+      imgSrc: 'AppUnlocked.png',
+      imgAlt: 'Access Granted',
+      body: 'Your user opens their email application, finds the email with the verification code.  These codes can be simple 5 or 6 digit numbers (less secure but good enough) or more lengthy passphrases comprised of 4 random 5 character words.  Once your web application has the verification code send a web message to npuser. npuser will verify the code and, if valid, tell your application how long ago the user was sent the message.  Your application can then allow your user to enter your web application.'
+    }
+  ],
   npKeyValues: [
     {
       title: 'Super easy for users',

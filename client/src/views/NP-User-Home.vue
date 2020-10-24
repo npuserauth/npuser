@@ -7,11 +7,18 @@
           h2(class="text-center") {{appText.hero.subTitle}}
           div(class="d-flex justify-center mt-10")
             div(class="font-weight-bold ", v-text-to-html="appText.hero.body")
+
+    div(id="npuser-how", class="mypage")
+      div(class="middle")
+        v-row(v-for="(m, index) in appText.npuserHow", :key="index", justify="space-around")
+          v-card(class="myCard")
+            v-card-title {{m.title}}
+            div(v-if="m.imgSrc", class="my-card-image-wrapper")
+              v-img(:src="require(`../assets/${m.imgSrc}`)", :alt="m.imgAlt", contain, height="400px", width="600px")
+            v-card-text(class="mycardtext", v-text-to-html="m.body")
+
     div(id="npuser-values", class="mypage")
       div(class="middle")
-        v-row(justify="space-around")
-          div
-            v-img(src="../assets/n.p.user.png", alt="SSO", width="600px")
         v-row(v-for="(m, index) in appText.npKeyValues", :key="index", justify="space-around")
           v-card(class="myCard")
             v-card-title {{m.title}}
@@ -55,10 +62,15 @@ The scroll to hash depends on the scrollBehavior inside router.ts
   }
 </script>
 
-<style scoped>
-.mycardtext {
-  font-size: 1.15rem;
-}
+<style scoped lang="scss">
+  .mycardtext {
+    font-size: 1.15rem;
+  }
+
+  .my-card-image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
   .mypage {
     /*font-family: "Avenir Next", "Avenir", sans-serif !important;*/
     position: relative;
