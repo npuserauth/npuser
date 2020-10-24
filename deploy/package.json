@@ -1,14 +1,8 @@
 {
   "scripts": {
-    "dev:build": "cp dev.env .env && docker-compose -f d-c.yml up --build",
-    "dev:run": "cp dev.env .env && docker-compose -f d-c.yml up -d",
-    "dev:stop": "docker-compose -f d-c.yml down",
-    "prod:build": "cp prod.env .env && docker-compose -f d-c.yml up --build",
-    "prod:run": "cp prod.env .env && docker-compose -f d-c.yml up -d",
-    "prod:stop": "docker-compose -f d-c.yml down",
-    "client:prod:build": "cp prod.env .env && docker-compose -f d-c.yml up --build",
-    "client:prod:run": "cp prod.env .env && docker-compose -f d-c.yml up -d",
-    "client:prod:stop": "docker-compose -f d-c.yml down",
+    "client:prod:build": "cp prod.env .env && docker-compose -f d-c-client.yml up --build",
+    "client:prod:run": "cp prod.env .env && docker-compose -f d-c-client.yml up -d",
+    "client:prod:stop": "docker-compose -f d-c-client.yml down",
     "ls": "docker ps -a",
     "stop": "docker stop $(docker ps -a -q)",
     "rm": "docker rm $(docker ps -a -q)",
