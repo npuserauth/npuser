@@ -11,6 +11,10 @@
   "contributors": [
     "Bryan Gilbert <bryan.gilbert@gmail.com>"
   ],
+  "related": [
+    "https://github.com/bryan-gilbert/npuser-sendmail",
+    "https://github.com/bryan-gilbert/npuser-client"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -32,8 +36,8 @@
     "test": "npm run test:client && npm run test:server",
     "test:client": "cd client && npm run test",
     "test:server": "cd server && npm run test",
-    "restart:prod": "cd deployment && npm run prod:stop && npm run prod:build",
-    "update:prod": "git pull && npm run build && npm run restart:prod"
+    "restart:client": "cd deploy && npm run client:prod:stop && npm run client:prod:build",
+    "update:prod": "git pull && npm run build && npm run restart:client"
   },
   "scriptsComments": {
     "run": "for dev and prod cd into the deployment directory and run scripts",
