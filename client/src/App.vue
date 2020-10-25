@@ -4,7 +4,7 @@
     v-main(id="main")
       router-view
     v-footer(app)
-      div Footer content
+      div(class="copyright") &#169; 2020 npuser.org
 
 </template>
 
@@ -19,3 +19,10 @@
     }),
   }
 </script>
+
+<style scoped>
+  .copyright {
+    font-size: .7rem;
+    color: #4e4e4e;
+  }
+</style>

@@ -8,44 +8,16 @@
           div(class="d-flex justify-center mt-10")
             div(class="font-weight-bold ", v-text-to-html="appText.hero.body")
 
-    div(id="npuser-values", class="mypage")
-      div(class="middle")
-        v-row(v-for="(m, index) in appText.npKeyValues", :key="index", justify="space-around")
-          v-card(class="myCard")
-            v-card-title {{m.title}}
-            v-card-text(class="mycardtext", v-text-to-html="m.body")
+    home-section(id="npuser-values", :section-def="appText.npKeyValues")
 
-    div(id="npuser-how", class="mypage")
-      div(class="middle")
-        h1(class="text-center", v-text-to-html="appText.alternatives.title")
-        v-row(v-for="(m, index) in appText.npuserHow", :key="index", justify="space-around")
-          v-card(class="myCard")
-            v-card-title {{m.title}}
-            div(v-if="m.imgSrc", class="my-card-image-wrapper")
-              v-img(:src="require(`../assets/${m.imgSrc}`)", :alt="m.imgAlt", contain, height="400px", width="600px")
-            v-card-text(class="mycardtext", v-text-to-html="m.body")
+    home-section(id="npuser-how", :section-def="appText.npuserHow")
 
-    div(id="alternatives", class="mypage")
-      div(class="middle")
-        h1(class="text-center", v-text-to-html="appText.alternatives.title")
-        v-row(justify="space-around")
-          p() {{appText.alternatives.intro}}
-          div
-            v-img(src="../assets/SSO.png", alt="SSO", width="600px")
-        v-row(v-for="(m, index) in appText.sso.ssoWeakness", :key="index", justify="space-around")
-          v-card(class="myCard")
-            v-card-text(class="mycardtext", v-text-to-html="m")
+    home-section(id="alternatives", :section-def="appText.alternatives")
 
-    div(id="start", class="mypage")
-      div(class="middle")
-        h1(class="text-center") PLACEHOLDER
-        h2(class="text-center") Come back soon to see this section evolve
-        v-row(justify="space-around")
-          div
-            v-img(src="../assets/passwords.png", alt="SSO", width="600px")
-        v-row(v-for="(m, index) in appText.sso.ssoWeakness", :key="index", justify="space-around")
-          v-card(class="myCard")
-            v-card-text(class="mycardtext", v-text-to-html="m")
+    home-section(id="sso", :section-def="appText.sso")
+
+    home-section(id="start", :section-def="appText.start")
+
 </template>
 
 <!--
@@ -55,15 +27,17 @@ The scroll to hash depends on the scrollBehavior inside router.ts
 
 <script>
   import { appText } from '@/appText'
+  import HomeSection from './Home-Section.vue'
 
   export default {
+    components: { HomeSection },
     data: () => ({
       appText,
     }),
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
   .hero {
     font-size: 1.3rem;

@@ -1,0 +1,6 @@
+If a hacker breaks into your SSO identity provider, all your linked systems could be open to attack. The risk of this is small because high-quality identity providers have top-notch security but there are no guarantees and some users prefer to not trust a single point of failure.  <br/> With <strong>npuser</strong> there is nothing to hack on the <strong>npuser</strong>  service so, your users are protected.
+
+Setting up an application with SSO can take longer than expected. <br/> With <strong>npuser</strong> your application simply installs the <strong>npuser</strong> library and makes two web service calls with your application's private clientID
+During SSO the user is redirected to another company's website and will be redirected back to your application when done.  <br/> With <strong>npuser</strong> the user never leaves your site.
+SSO using social networking services may be restricted with workplaces that block social media sites and government connections where censorship is involved. <br/> With <strong>npuser</strong> your application is always available.
+Some SSO-linked sites may give their user data to third-party entities. <br/> With <strong>npuser</strong> your user's information is never stored on <strong>npuser</strong> so there is nothing that can be shared.
