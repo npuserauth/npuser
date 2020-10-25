@@ -2,8 +2,7 @@
   v-app
     app-bar
     v-main(id="main")
-      v-container(fluid)
-        router-view
+      router-view
     v-footer(app)
       div Footer content
 

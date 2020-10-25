@@ -1,7 +1,8 @@
 <template lang="pug">
   v-app-bar(app, elevate-on-scroll, scroll-target="#main")
     //v-app-bar-nav-icon
-    v-toolbar-title {{appText.appTitle}}
+    v-img(class="ml-2", src="../assets/npuser-icon@0.25x.png", max-width="40px", max-height="40px")
+    v-toolbar-title(class="ml-2", style="cursor: pointer" @click="$router.push('/')") {{appText.appTitle}}
     v-spacer
     router-link(v-for="(lk, index) in appText.topLinks", :key="index", :to="lk.hash", class="rlink") {{lk.text}}
 

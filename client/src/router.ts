@@ -32,7 +32,7 @@ export default new Router({
       if (to.hash) {
         return {
           selector: to.hash,
-          offset: { x: 0, y: 40 },
+          offset: { x: 0, y: 60 },
         }
       }
     },

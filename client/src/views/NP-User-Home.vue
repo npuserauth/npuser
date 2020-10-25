@@ -2,20 +2,11 @@
   div(class="homePage")
     div(id="intro", class="mypage")
       div(class="mycontainer container1")
-        div(class="mycontent mt-4")
+        div(class="mycontent mt-4 hero")
           h1(class="text-center", v-text-to-html="appText.hero.title")
           h2(class="text-center") {{appText.hero.subTitle}}
           div(class="d-flex justify-center mt-10")
             div(class="font-weight-bold ", v-text-to-html="appText.hero.body")
-
-    div(id="npuser-how", class="mypage")
-      div(class="middle")
-        v-row(v-for="(m, index) in appText.npuserHow", :key="index", justify="space-around")
-          v-card(class="myCard")
-            v-card-title {{m.title}}
-            div(v-if="m.imgSrc", class="my-card-image-wrapper")
-              v-img(:src="require(`../assets/${m.imgSrc}`)", :alt="m.imgAlt", contain, height="400px", width="600px")
-            v-card-text(class="mycardtext", v-text-to-html="m.body")
 
     div(id="npuser-values", class="mypage")
       div(class="middle")
@@ -24,11 +15,21 @@
             v-card-title {{m.title}}
             v-card-text(class="mycardtext", v-text-to-html="m.body")
 
-    div(id="sso", class="mypage")
+    div(id="npuser-how", class="mypage")
       div(class="middle")
-        h1(class="text-center", v-text-to-html="appText.sso.title")
-        h2(class="text-center") {{appText.sso.subTitle}}
+        h1(class="text-center", v-text-to-html="appText.alternatives.title")
+        v-row(v-for="(m, index) in appText.npuserHow", :key="index", justify="space-around")
+          v-card(class="myCard")
+            v-card-title {{m.title}}
+            div(v-if="m.imgSrc", class="my-card-image-wrapper")
+              v-img(:src="require(`../assets/${m.imgSrc}`)", :alt="m.imgAlt", contain, height="400px", width="600px")
+            v-card-text(class="mycardtext", v-text-to-html="m.body")
+
+    div(id="alternatives", class="mypage")
+      div(class="middle")
+        h1(class="text-center", v-text-to-html="appText.alternatives.title")
         v-row(justify="space-around")
+          p() {{appText.alternatives.intro}}
           div
             v-img(src="../assets/SSO.png", alt="SSO", width="600px")
         v-row(v-for="(m, index) in appText.sso.ssoWeakness", :key="index", justify="space-around")
@@ -63,6 +64,11 @@ The scroll to hash depends on the scrollBehavior inside router.ts
 </script>
 
 <style scoped lang="scss">
+
+  .hero {
+    font-size: 1.3rem;
+  }
+
   .mycardtext {
     font-size: 1.15rem;
   }
@@ -87,7 +93,7 @@ The scroll to hash depends on the scrollBehavior inside router.ts
     right: 0;
     bottom: 0;
     top: 0;
-    padding: 20px;
+    padding: 0;
     margin: 0;
     overflow: auto;
   }
