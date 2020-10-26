@@ -14,9 +14,13 @@
   export default {
     name: 'HomeSection',
     props: {
-      id: { type: String },
       sectionDef: { type: Object}
     },
+    computed: {
+      id () {
+        return this.sectionDef.id
+      }
+    }
   }
 </script>
 

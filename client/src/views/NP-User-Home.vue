@@ -8,15 +8,17 @@
           div(class="d-flex justify-center mt-10")
             div(class="font-weight-bold ", v-text-to-html="appText.hero.body")
 
-    home-section(id="npuser-values", :section-def="appText.npKeyValues")
+    home-section(:section-def="appText.npKeyValues")
 
-    home-section(id="npuser-how", :section-def="appText.npuserHow")
+    home-section(:section-def="appText.npuserHow")
 
-    home-section(id="alternatives", :section-def="appText.alternatives")
+    home-section(:section-def="appText.alternatives")
 
-    home-section(id="sso", :section-def="appText.sso")
+    home-section(:section-def="appText.sso")
 
-    home-section(id="start", :section-def="appText.start")
+    home-section(:section-def="appText.start")
+
+    home-section(:section-def="appText.references")
 
 </template>
 

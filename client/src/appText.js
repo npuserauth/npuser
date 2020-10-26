@@ -19,55 +19,61 @@ export const appText = {
       'text': 'Get Started',
     },
   ],
-  'hero': {
-    'title': 'n p user ',
+}
+
+appText.hero = {
+  'title': 'n p user ',
     'subTitle': 'No password user authentication',
     'body': 'An application service for user authentication.\n' +
-      '- quick and painless registration\n' +
-      '- quick and painless authentication\n' +
-      '- no passwords\n' +
-      '- no tracking of user on the authentication server\n' +
-      '- user privacy protected across applications\n' +
-      '- more users will try your application\n' +
-      '- open source'
-  },
-  'npKeyValues': {
-    title: 'How npuser works',
+  '- quick and painless registration\n' +
+  '- quick and painless authentication\n' +
+  '- no passwords\n' +
+  '- no tracking of user on the authentication server\n' +
+  '- user privacy protected across applications\n' +
+  '- more users will try your application\n' +
+  '- open source'
+}
+
+appText.npKeyValues = {
+  id: 'key-values',
+  title: 'How npuser works',
     text: [
-      {
-        title: 'Easy registration',
-        body: 'Your users cam quickly get into your service and skip the usual up-front challenge of registration. '
-      },
-      {
-        title: 'Easy login',
-        body: 'Your users can return to your application easily. If they come back via the same browser on the same computer then your users can immediately access your service. Yet if they come from another machine or browser the log in process is as easy as the registration process.  Your application can (should?) use a hash of the user\'s email address as their user id. With this hash you can grant your user access to their resources. '
-      },
-      {
-        title: 'No password',
-        body: 'Users no longer need to create yet another strong and unique password! No need to implement "Forgot your password".  No password strength checkers and complex validation code. No need for password policies.  Etc. '
-      },
-      {
-        title: 'No tracking',
-        body: 'npuser has no need for a database and it doesn\'t track users in any way.  It\'s open source so check out the code!'
-      },
-      {
-        title: 'No social media tracking',
-        body: 'Some users are concerned about privacy leakage between applications that share authentication services. Because npuser has no database it can\'t cross reference your users between other applications that may also use npuser.'
-      },
-      {
-        title: 'Improve access',
-        body: 'Users are often turned away from applications when they need to create yet another secure password that is different from all the other sites they use. '
-      },
-      {
-        title: 'Open Source',
-        body: 'npuser is open source, including how the OS is configured so technical users can verify the security and the claim the system is not tracking users.\n' +
-          'Your application can use the nupser.org service or install and run the npuser system on your servers.'
-      },
-    ],
-  },
-  'npuserHow': {
-    title: 'How npuser works',
-    text:[
+    {
+      title: 'Easy registration',
+      body: 'Your users cam quickly get into your service and skip the usual up-front challenge of registration. '
+    },
+    {
+      title: 'Easy login',
+      body: 'Your users can return to your application easily. If they come back via the same browser on the same computer then your users can immediately access your service. Yet if they come from another machine or browser the log in process is as easy as the registration process.  Your application can (should?) use a hash of the user\'s email address as their user id. With this hash you can grant your user access to their resources. '
+    },
+    {
+      title: 'No password',
+      body: 'Users no longer need to create yet another strong and unique password! No need to implement "Forgot your password".  No password strength checkers and complex validation code. No need for password policies.  Etc. '
+    },
+    {
+      title: 'No tracking',
+      body: 'npuser has no need for a database and it doesn\'t track users in any way.  It\'s open source so check out the code!'
+    },
+    {
+      title: 'No social media tracking',
+      body: 'Some users are concerned about privacy leakage between applications that share authentication services. Because npuser has no database it can\'t cross reference your users between other applications that may also use npuser.'
+    },
+    {
+      title: 'Improve access',
+      body: 'Users are often turned away from applications when they need to create yet another secure password that is different from all the other sites they use. '
+    },
+    {
+      title: 'Open Source',
+      body: 'npuser is open source, including how the OS is configured so technical users can verify the security and the claim the system is not tracking users.\n' +
+        'Your application can use the nupser.org service or install and run the npuser system on your servers.'
+    },
+  ],
+}
+
+appText.npuserHow = {
+  id: 'npuser-how',
+  title: 'How npuser works',
+  text: [
     {
       title: 'Simple Account Creation and Login',
       imgSrc: 'AppLocked.png',
@@ -92,52 +98,69 @@ export const appText = {
       body: 'After your user is verified your application can store a JWT token that npuser provides in your user\'s browser localstorage. Whenever your user invokes an API call on your server just have your application foward that JWT to npuser to be sure the bearer of that token has been authenticated.  You can use this to authorize the user to access your services.\n' +
         'Alternatively your application can generate and manage its own JWT.'
     },
-  ]},
-  'alternatives': {
-    title: 'Alternatives to npuser',
+  ],
+}
+
+appText.start = {
+  id: 'start',
+  title: 'Get Started',
+  subTitle: 'npuser is not yet ready',
+  text: [
+    {
+      title: 'Status',
+      body: 'The service is under active development. Two elements need to be completed and then you can try it out.',
+    },
+    {
+      title: 'Want to be notified?',
+      body: 'Great! Send an email to <a href="mailto:info@npuser.org?subject=Tell me when npuser is ready.">Email Us</a> ',
+    },
+    {
+      title: 'Want to contribute?',
+      body: 'Great! Submit a pull request to the open source project https://github.com/bryan-gilbert/npuser',
+    },
+  ],
+}
+
+appText.alternatives = {
+  id: 'alternatives',
+  title: 'Alternatives to npuser',
     intro: alternativeIntro,
     text: [
-      {
-        title: 'Build your own',
-        imgSrc: 'passwords.png',
-        imgAlt: 'Per application',
-        body: 'You build your own in each application.'
-      },
-    ],
-  },
-  sso: {
-    title: 'SSO',
-    subTitle: 'Single Sign On services',
-    text: [
-      {
-        title: 'Single Sign On',
-        imgSrc: 'SSO.png',
-        imgAlt: 'SSO',
-        body: 'Some applications decide to use another authentication service to manage user accounts, including passwords.',
-      },
-      {
-        title: 'Challenges',
-        body: ssoWeakness,
-      }
-    ],
-  },
-  start: {
-    title: 'Get Started',
-    subTitle: 'npuser is not yet ready',
-    text: [
-      {
-        title: 'Status',
-        body: 'The service is under active development. Two elements need to be completed and then you can try it out.',
-      },
-      {
-        title: 'Want to be notified?',
-        body: 'Great! Send an email to <a href="mailto:info@npuser.org?subject=Tell me when npuser is ready.">Email Us</a> ',
-      },
-      {
-        title: 'Want to contribute?',
-        body: 'Great! Submit a pull request to the open source project https://github.com/bryan-gilbert/npuser',
-      },
-    ],
-  },
+    {
+      title: 'Build your own',
+      imgSrc: 'passwords.png',
+      imgAlt: 'Per application',
+      body: 'You build your own in each application.'
+    },
+  ],
+}
+
+appText.sso = {
+  id: 'sso',
+  title: 'SSO',
+  subTitle: 'Single Sign On services',
+  text: [
+    {
+      title: 'Single Sign On',
+      imgSrc: 'SSO.png',
+      imgAlt: 'SSO',
+      body: 'Some applications decide to use another authentication service to manage user accounts, including passwords.',
+    },
+    {
+      title: 'Challenges',
+      body: ssoWeakness,
+    }
+  ],
+}
+
+appText.references = {
+  id: 'references',
+  title: 'References',
+  text: [
+    {
+      title: "How secure is the \“no-password\” login scheme?",
+      body: "https://security.stackexchange.com/questions/173450/how-secure-is-the-no-password-login-scheme",
+    }
+  ]
 }
 
