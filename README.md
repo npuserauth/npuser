@@ -55,7 +55,7 @@ Your application can pass this JWT as-is to your client or create its own JWT wr
 As your user does stuff with your application your client side code will send the JWT back to your server 
 which can then be validated by another API call to npuser.
 
-Note how npuser does not track the user.  
+Note that npuser does not track the user.  
 
 If your client side code stashes the JWT into the user's browser's local storage then your user can return to your 
 application, in that browser, at any time. If your user wants to visit your application from another device or browser
@@ -63,6 +63,33 @@ they will need to repeat the validation process.
 Your application can match up the two login attempts based on email address. 
 Your application may hash this data so that you’re not storing PII (personally identifying information)
 
+##  Install and Run
+
+## Web site
+
+After install, to run a development version of the web site.  For Mac users:
+
+(1).
+```
+sudo vi /etc/hosts
+```
+Add a line similar to this:
+```
+127.0.0.1   npuser.mac
+```
+
+(2). Build the client
+```bash
+cd deploy
+npm run client:dev:build
+```
+
+(3). Test
+```
+curl http://npuser.mac:8081
+```
+
+You may change the local host name and/or port by editing the ```dev.env``` file in the /deploy directory.
 
 ## Project Planning and Status
 

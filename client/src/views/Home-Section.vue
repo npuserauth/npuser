@@ -14,13 +14,13 @@
   export default {
     name: 'HomeSection',
     props: {
-      sectionDef: { type: Object}
+      sectionDef: { type: Object },
     },
     computed: {
       id () {
         return this.sectionDef.id
-      }
-    }
+      },
+    },
   }
 </script>
 

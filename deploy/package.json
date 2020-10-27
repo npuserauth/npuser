@@ -1,8 +1,12 @@
 {
   "scripts": {
-    "client:prod:build": "cp prod.env .env && docker-compose -f d-c-client.yml up --build",
-    "client:prod:run": "cp prod.env .env && docker-compose -f d-c-client.yml up -d",
-    "client:prod:stop": "docker-compose -f d-c-client.yml down",
+    "client:dev:build": "cp dev.env .env &&  npm run client:build",
+    "client:dev:run": "cp dev.env .env &&  npm run client:run",
+    "client:prod:build": "cp prod.env .env &&  npm run client:build",
+    "client:prod:run": "cp prod.env .env && npm run client:run",
+    "client:build": "docker-compose -f d-c-client.yml up --build",
+    "client:run": "docker-compose -f d-c-client.yml up -d",
+    "client:stop": "docker-compose -f d-c-client.yml down",
     "ls": "docker ps -a",
     "stop": "docker stop $(docker ps -a -q)",
     "rm": "docker rm $(docker ps -a -q)",
