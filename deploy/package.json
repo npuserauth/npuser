@@ -7,6 +7,16 @@
     "client:build": "docker-compose -f d-c-client.yml up --build",
     "client:run": "docker-compose -f d-c-client.yml up -d",
     "client:stop": "docker-compose -f d-c-client.yml down",
+
+    "server:dev:build": "cp dev.env .env &&  npm run server:build",
+    "server:dev:run": "cp dev.env .env &&  npm run server:run",
+    "server:prod:build": "cp prod.env .env &&  npm run server:build",
+    "server:prod:run": "cp prod.env .env && npm run server:run",
+    "server:build": "docker-compose -f d-c-server.yml up --build",
+    "server:run": "docker-compose -f d-c-server.yml up -d",
+    "server:stop": "docker-compose -f d-c-server.yml down",
+
+
     "ls": "docker ps -a",
     "stop": "docker stop $(docker ps -a -q)",
     "rm": "docker rm $(docker ps -a -q)",
