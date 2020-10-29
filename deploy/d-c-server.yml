@@ -18,7 +18,7 @@ services:
       - SERVER_PORT
       - START_ARG
     ports:
-      - 27002:27001
+      - 27001:27001
     restart: unless-stopped
     volumes:
       - ../logs/api:/logs
@@ -26,3 +26,11 @@ services:
       - npm
       - run
       - ${START_ARG}
+    networks:
+      - default
+      - npuser-network
+
+networks:
+  npuser-network:
+    driver: bridge
+    name: npuser-network
