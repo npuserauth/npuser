@@ -52,19 +52,16 @@ export default class ApiUserController {
     private readonly connection: IFileDb;
 
     private readonly authUtil: IAuthUtil;
-    private emailSender: EmailSender;
 
-    constructor (connection: IFileDb, authUtil: IAuthUtil, emailSender: EmailSender) {
+    constructor (connection: IFileDb, authUtil: IAuthUtil) {
       this.connection = connection
       this.authUtil = authUtil
-      this.emailSender = emailSender
     }
 
-    userGet: RequestHandler = async (req, res) => {
+    healthCheck: RequestHandler = async (req, res) => {
       logger.info('Rcv user get request ')
       res.status(200).send({
-        message: 'Auth email request sent'
-        // token
+        message: 'Placeholder API for a health check get call'
       })
     }
 
@@ -104,8 +101,8 @@ export default class ApiUserController {
     const jwtToken: string = this.authUtil.createToken(payload, { expiresIn: TOKEN_EXPIRES_IN })
     // TODO remove log output of email. this is a no tracking service!
     logger.info(`useAuth will send ${vcode} to ${email}. TODO remove this output from the logs.`)
-    // TODO Compose email body and send email to user
-    this.emailSender.sendVerificationMail(email, vcode)
+    const emailSender = new EmailSender()
+    emailSender.sendVerificationMail(email, vcode)
     logger.debug('TODO Compose email body and send email to user')
     const responsePacket: AuthResponsePacket = {
       message: 'User auth request',
@@ -147,7 +144,7 @@ export default class ApiUserController {
     const router: Router = Router()
     router.post('/', requestMiddleware(this.userAuth))
     router.post('/validate', requestMiddleware(this.userValidate))
-    router.get('/', requestMiddleware(this.userGet))
+    router.get('/', requestMiddleware(this.healthCheck))
     return router
   }
 }

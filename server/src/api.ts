@@ -7,7 +7,6 @@ import logger from './logger'
 import { IConfig } from './config/config'
 import AuthUtil, { IAuthUtil } from './helpers/auth-util'
 import ApiUserController from './api-user/api-user-controller'
-import { constructEmailSender } from './api-user/email-sender'
 
 function setupCors (config: IConfig) {
   const whitelist: string[] = [] // 'http://localhost:28000', 'http://localhost:27000']
@@ -33,18 +32,15 @@ export function apiMiddle (app: Express, config: IConfig, connection: IFileDb) {
     next()
   })
 
-  return constructEmailSender(config)
-    .then((emailSender) => {
-      const corsOptions = setupCors(config)
-      const middleWare = [
-        cors(corsOptions)
-      ]
-      const authUtil: IAuthUtil = new AuthUtil(config)
-      const apiUser = new ApiUserController(connection, authUtil, emailSender)
-      const api = Router()
-      api.use('/apiuser', middleWare, apiUser.route())
-      return api
-    })
+  const corsOptions = setupCors(config)
+  const middleWare = [
+    cors(corsOptions)
+  ]
+  const authUtil: IAuthUtil = new AuthUtil(config)
+  const apiUser = new ApiUserController(connection, authUtil)
+  const api = Router()
+  api.use('/apiuser', middleWare, apiUser.route())
+  return api
 }
 
 export function apiError (app: Express, config: IConfig) {
