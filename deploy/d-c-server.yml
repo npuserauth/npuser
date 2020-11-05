@@ -18,7 +18,7 @@ services:
       - SERVER_PORT
       - START_ARG
     ports:
-      - 27001:27001
+      - ${SERVER_PORT}:${SERVER_PORT}
     restart: unless-stopped
     volumes:
       - ../logs/api:/logs
@@ -29,6 +29,11 @@ services:
     networks:
       - default
       - npuser-network
+    healthcheck:
+      test: curl -f http://npuserserver:${SERVER_PORT} >/dev/null 2>&1
+      interval: 1m
+      timeout: 10s
+      retries: 3
 
 networks:
   npuser-network:
