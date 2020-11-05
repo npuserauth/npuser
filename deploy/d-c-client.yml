@@ -20,7 +20,7 @@ services:
       - ../caddy/caddy_data:/data
       - ../caddy/caddy_config:/config
     healthcheck:
-      test: curl -f https://localhost || exit 1
+      test: curl -f http://localhost >/dev/null 2>&1
       interval: 1m
       timeout: 10s
       retries: 3
