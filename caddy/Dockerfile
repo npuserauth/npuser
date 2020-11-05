@@ -1,7 +1,8 @@
 FROM caddy:2.1.1
 
 # to install curl and jq into the caddy container
-# RUN apk add curl jq
+# need curl for healthcheck
+RUN apk add curl jq
 # to list the caddy configuration
 # RUN curl http://localhost:2019/config/ | jq
 
