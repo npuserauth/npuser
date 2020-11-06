@@ -116,7 +116,7 @@ appText.start = {
     },
     {
       title: 'Want to contribute?',
-      body: 'Great! Submit a pull request to the open source project https://github.com/bryan-gilbert/npuser',
+      body: 'Great! Submit a pull request to the open source project https://github.com/npuserauth/npuser',
     },
   ],
 }

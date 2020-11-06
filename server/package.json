@@ -4,7 +4,7 @@
   "description": "No password auth services.",
   "repository": {
     "type": "git",
-    "url": "git+https:https://github.com/bryan-gilbert/npuser.git"
+    "url": "git+https:https://github.com/npuserauth/npuser.git"
   },
   "keywords": [
     "api",
@@ -67,7 +67,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bryan-gilbert/npuser/issues"
+    "url": "https://github.com/npuserauth/npuser/issues"
   },
   "homepage": "https://npuser.org"
 }

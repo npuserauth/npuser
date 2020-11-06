@@ -12,16 +12,16 @@
     "Bryan Gilbert <bryan.gilbert@gmail.com>"
   ],
   "related": [
-    "https://github.com/bryan-gilbert/npuser-sendmail",
-    "https://github.com/bryan-gilbert/npuser-client"
+    "https://github.com/npuserauth/npuser-sendmail",
+    "https://github.com/npuserauth/npuser-client"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bryan-gilbert/npuser"
+    "url": "git+https://github.com/npuserauth/npuser"
   },
   "bugs": {
-    "url": "https://github.com/bryan-gilbert/npuser/issues"
+    "url": "https://github.com/npuserauth/npuser/issues"
   },
   "homepage": "https://npuser.org",
   "scripts": {

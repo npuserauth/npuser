@@ -28,6 +28,18 @@ Or your application can join the trend toward using "no password" authentication
 
 ![4]
 
+## Project Planning and Status
+
+See related projects:
+- https://github.com/npuserauth/npuser-client
+- https://github.com/npuserauth/npuser-sendmail
+- https://github.com/npuserauth/npuser-sample
+
+Status:
+- The npuser client NPM module is available
+- The npuser service is operating for development.
+- The https://edehr.org project is developing the first client of this npuser.org service.
+
 
 ## Authentication Flow
 
@@ -91,21 +103,7 @@ curl http://npuser.mac:8081
 
 You may change the local host name and/or port by editing the ```dev.env``` file in the /deploy directory.
 
-## Project Planning and Status
 
-See related projects:
-- https://github.com/bryan-gilbert/npuser-client
-- https://github.com/bryan-gilbert/npuser-sendmail
-
-Status:
-- The npuser client NPM module is available
-- The npuser-sendmail component is done and ready to be linked into npuser
-- The main npuser service (this git project) is ready to accept authorization requests including the original
-authorization, generation of the verification code and subsequent validation.
-
-Next:
-- link npuser to make the local web service call to npuser-sendmail to send the email with the validation code.
- 
 ## Notes
 
 The following describes the steps used to create the server sub-project with Typescript, webpack, babel and lint.
