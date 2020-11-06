@@ -8,6 +8,7 @@ import requestMiddleware from '../middleware/request-middleware'
 import { IFileDb } from '../db-local'
 import { IAuthUtil } from '../helpers/auth-util'
 import { EmailSender } from './email-sender'
+import { IConfig } from '../config/config'
 
 /*
 This controller lets users register with NPUser.
@@ -52,8 +53,10 @@ export default class ApiUserController {
     private readonly connection: IFileDb;
 
     private readonly authUtil: IAuthUtil;
+    private readonly config: IConfig;
 
-    constructor (connection: IFileDb, authUtil: IAuthUtil) {
+    constructor (config: IConfig, connection: IFileDb, authUtil: IAuthUtil) {
+      this.config = config
       this.connection = connection
       this.authUtil = authUtil
     }
@@ -102,13 +105,19 @@ export default class ApiUserController {
     // TODO remove log output of email. this is a no tracking service!
     logger.info(`useAuth will send ${vcode} to ${email}. TODO remove this output from the logs.`)
     const emailSender = new EmailSender()
-    emailSender.sendVerificationMail(email, vcode)
-    logger.debug('TODO Compose email body and send email to user')
-    const responsePacket: AuthResponsePacket = {
-      message: 'User auth request',
-      token: jwtToken
+    try {
+      await emailSender.sendVerificationMail(this.config, email, vcode)
+      logger.debug('TODO Compose email body and send email to user')
+      const responsePacket: AuthResponsePacket = {
+        message: 'User auth request',
+        token: jwtToken
+      }
+      res.send(responsePacket)
+    } catch (e) {
+      res.status(500).send({
+        message: 'Internal Error'
+      })
     }
-    res.send(responsePacket)
   }
 
   userValidate: RequestHandler = async (req, res) => {

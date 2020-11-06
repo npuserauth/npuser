@@ -37,7 +37,7 @@ export function apiMiddle (app: Express, config: IConfig, connection: IFileDb) {
     cors(corsOptions)
   ]
   const authUtil: IAuthUtil = new AuthUtil(config)
-  const apiUser = new ApiUserController(connection, authUtil)
+  const apiUser = new ApiUserController(config, connection, authUtil)
   const api = Router()
   api.use('/apiuser', middleWare, apiUser.route())
   return api

@@ -3,6 +3,8 @@ import path from 'path'
 import logger from '../logger'
 
 export interface IConfig {
+  mailServerHost: string;
+  mailServerPort: number;
   authTokenSecret: string;
   apiUrl: string;
   clientUrl: string;

@@ -1,13 +1,15 @@
 import logger from '../logger'
 import { IncomingMessage } from 'http'
+
+import { IConfig } from '../config/config'
 const http = require('http')
 
 export class EmailSender {
-  async sendPost (payload: object) {
+  async sendPost (config: IConfig, payload: object): Promise<object> {
     const payloadStr = JSON.stringify(payload)
     const opts = {
-      hostname: 'mailserver', // todo replace with name of container the provides verification email service
-      port: 3003,
+      hostname: config.mailServerHost,
+      port: config.mailServerPort,
       path: '/sendmail',
       method: 'POST',
       headers: {
@@ -15,6 +17,8 @@ export class EmailSender {
         'Content-Length': payloadStr.length
       }
     }
+    logger.debug('EmailSender send api call: ', opts)
+    console.log('EmailSender send api call: ', opts)
     return new Promise((resolve, reject) => {
       const request = http.request(opts, (response: IncomingMessage) => {
         let str = ''
@@ -27,15 +31,16 @@ export class EmailSender {
         })
       })
       request.on('error', (e: Error) => {
+        logger.error('EmailSender error: ' + e.message)
         reject(e)
       })
-      console.log('EmailSender sendPost: ', payload)
+      logger.debug('EmailSender sendPost: ', payload)
       request.write(payloadStr)
       request.end()
     })
   }
 
-  async sendVerificationMail (toAddress: string, vcode: string) {
+  async sendVerificationMail (config: IConfig, toAddress: string, vcode: string) {
     const fromAddress = 'npuser@npuser.org'
     const plainTextBody = `verification code ${vcode}`
     const htmlBody = '<html lang="en"><head></head>\n' +
@@ -45,13 +50,15 @@ export class EmailSender {
             '    </p></body></html>'
 
     const payload = {
-      from: fromAddress,
-      to: toAddress,
+      fromAddress: fromAddress,
+      toAddress: toAddress,
       subject: 'Verification code',
-      text: plainTextBody,
-      html: htmlBody
+      textBody: plainTextBody,
+      htmlBody: htmlBody
     }
-    const info = await this.sendPost(payload)
-    logger.info('Message sent: ', info)
+    logger.debug('Message payload: ', payload)
+    const info = await this.sendPost(config, payload)
+    logger.debug('Message sent: ', info)
+    return info
   }
 }

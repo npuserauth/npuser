@@ -18,11 +18,14 @@ const AUTH_TOKEN_SECRET = process.env.AUTH_TOKEN_SECRET || 'defaultTokenSecretFo
 const CLIENT_HOST = process.env.CLIENT_HOST
 const FAVICON = process.env.FAVICON || 'favicon.ico'
 
+const MAIL_SERVER_HOST = process.env.MAIL_SERVER_HOST
+const MAIL_SERVER_PORT = parseInt(process.env.MAIL_SERVER_PORT)
+
 // 'ethereal' for on mac dev. use 'sendmail' on server with postfix installed
 const EMAIL_SEND_METHOD = process.env.EMAIL_SEND_METHOD || 'ethereal'
 
 module.exports = function () {
-  return {
+  const cfg = {
     app: {
       title: TITLE,
       description: DESCRIPTION,
@@ -36,6 +39,10 @@ module.exports = function () {
     serverPort: SERVER_PORT,
     clientPort: CLIENT_PORT,
     clientHost: CLIENT_HOST,
-    favicon: FAVICON
+    favicon: FAVICON,
+    mailServerHost: MAIL_SERVER_HOST,
+    mailServerPort: MAIL_SERVER_PORT
   }
+  console.log('CONFIGURATION', cfg)
+  return cfg
 }

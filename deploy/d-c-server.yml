@@ -13,10 +13,11 @@ services:
       - CLIENT_HOST
       - CLIENT_PORT
       - NODE_ENV
-      - PROXY_PASS_HOST
       - SCHEME
       - SERVER_PORT
       - START_ARG
+      - MAIL_SERVER_HOST
+      - MAIL_SERVER_PORT
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     restart: unless-stopped
