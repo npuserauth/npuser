@@ -1,0 +1,119 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #DDEEFF;
+}
+.page {
+    height: 100vh;
+    /* Full height */
+    position: relative;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    /* parallax scrolling effect */
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: grey;
+}
+
+.container:after {
+    content: "";
+    position: absolute;
+    border: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    opacity: 0.6;
+}
+
+.content {
+    height: 100vh;
+    position: absolute; /* place content over top of the parallex image */
+    top: 0;
+}
+.container2 {
+    background-image: url("https://images.unsplash.com/photo-1587321081101-3fa677fa4683");
+}
+
+.container1 {
+    background-image: url("./img/bg.jpg");
+}
+
+.container3 {
+    background-image: url("https://images.unsplash.com/photo-1565527891925-f773aae06005");
+}
+/* Hero */
+.hero {
+    color: #FFF;
+    text-align: center;
+}
+
+
+.hero-center {
+    position: relative;
+    top: 4rem;
+    left: 1rem;
+}
+
+.feature-list {
+    background-color: #3F51B5;
+    height: 100rem;
+}
+
+.content-middle {
+    width: 970px;
+    margin: 0 auto;
+    max-width: 90%;
+    -webkit-transform: translateZ(1000px);
+    transform: translateZ(1000px); }
+
+.code {
+    width: 40%;
+    clear: both;
+    height: 200px;
+    background: #DDD;
+    border-radius: 2px;
+    margin: 10px 0;
+    padding: 10px; }
+.code pre, .code code {
+    height: 100%;
+    margin: 0; }
+.code code {
+    padding: 20px 0 0 20px; }
+.code--small code {
+    padding-top: 75px; }
+.code--left {
+    float: left; }
+.code--right {
+    float: right; }
+.code--wider {
+    width: 60%; }
+.code--wider code {
+    padding-top: 60px; }

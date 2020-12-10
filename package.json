@@ -1,0 +1,48 @@
+{
+  "name": "npuser",
+  "version": "1.0.0",
+  "author": "Bryan Gilbert <bryan.gilbert@gmail.com>",
+  "title": "npuser No Password User Authentication",
+  "keywords": [
+    "authentication",
+    "no password"
+  ],
+  "description": "This project provides a service for other applications seeking easy to implement no password user authentication",
+  "contributors": [
+    "Bryan Gilbert <bryan.gilbert@gmail.com>"
+  ],
+  "related": [
+    "https://github.com/npuserauth/npuser-sendmail",
+    "https://github.com/npuserauth/npuser-client"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/npuserauth/npuser"
+  },
+  "bugs": {
+    "url": "https://github.com/npuserauth/npuser/issues"
+  },
+  "homepage": "https://npuser.org",
+  "scripts": {
+    "install": "npm run install:client && npm run install:server",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "lint": "npm run lint:client && npm run lint:server",
+    "lint:client": "cd client && npm run lint",
+    "lint:server": "cd server && npm run lint",
+    "test": "npm run test:client && npm run test:server",
+    "test:client": "cd client && npm run test",
+    "test:server": "cd server && npm run test",
+    "start": "echo 'cd deploy and see readme'",
+    "update:prod": "git pull && npm run build && npm run restart:client"
+  },
+  "scriptsComments": {
+    "run": "for dev and prod cd into the deployment directory and run scripts",
+    "install": "MUST run this on newly clone repo or to update packages",
+    "lint": "clean code",
+    "test": "run tests"
+  },
+  "devDependencies": {
+  }
+}

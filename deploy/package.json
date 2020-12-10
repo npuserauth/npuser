@@ -1,0 +1,29 @@
+{
+  "scripts": {
+    "dev": "cp dev.env .env",
+    "prod": "cp prod.env .env",
+    "client:run": "docker-compose -f d-c-client.yml up",
+    "client:stop": "docker-compose -f d-c-client.yml down",
+    "srv:run": "echo See server package.json",
+    "srv:stop": "echo See server package.json",
+    "old:srv:run": "docker-compose -f d-c-server.yml up",
+    "old:srv:stop": "docker-compose -f d-c-server.yml down",
+    "ls": "docker ps -a",
+    "stop": "docker stop $(docker ps -a -q)",
+    "rm": "docker rm $(docker ps -a -q)",
+    "prune": "docker system prune"
+  },
+  "scriptsComments": {
+    "dev": "set dev env",
+    "prod": "set prod env",
+    "client:run": "run client caddy web server [-- -d]  or [-- -build]",
+    "client:stop": "stop main web server",
+    "srv:run": "run npuser [-- -d]  or [-- --build]",
+    "srv:stop": "stop npuser",
+    "ls": "list docker containers",
+    "stop": "stop all running containers",
+    "rm": "remove all stopped containers",
+    "prune": "delete everything not running, images, containers etc",
+    "exec": "also see the exec.sh shell script"
+  }
+}

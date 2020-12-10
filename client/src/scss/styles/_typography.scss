@@ -1,0 +1,65 @@
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import "../definitions";
+
+body, button, input, select, textarea {
+  color: $black;
+  font-family: $bodyFontFamily;
+  font-size: $bodyFontSize;
+  line-height: 1.4;
+}
+
+h1, h2, h3, .h3, h4, h5, h6 {
+  color: $grey70;
+  font-family: $bodyFontFamily;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: .75em;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: .625em;
+}
+
+h3, .h3 {
+  font-size: 20px;
+  margin-bottom: .5em;
+}
+
+h4 {
+  margin-bottom: 1em;
+}
+
+p {
+  color: $grey80;
+  margin-bottom: 1em;
+}
+
+.assetLink {
+  margin-bottom: .5em;
+}
+
+.icon-right {
+  margin-left: 5px;
+}
+
+.icon-left {
+  margin-right: 5px;
+}
+
+.icon-group {
+  position: absolute;
+  right: 0;
+
+  & svg.svg-inline--fa {
+    font-size: 20px;
+  }
+}
+
+.errorMessageList, .errorMessage {
+  color: $error;
+}

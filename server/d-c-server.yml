@@ -1,0 +1,37 @@
+version: '3'
+services:
+  npuserserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: npuserserver
+    hostname: npuserserver
+    environment:
+      - AUTH_TOKEN_SECRET
+      - NODE_ENV
+      - START_ARG
+      - SERVER_PORT
+      - MAIL_SERVER_URL
+      - NPUSER_BASE_CLIENTS
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    restart: unless-stopped
+    volumes:
+      - ../logs/api:/logs
+    entrypoint:
+      - npm
+      - run
+      - ${START_ARG}
+    networks:
+      - default
+      - npuser-network
+    healthcheck:
+      test: curl -f http://npuserserver:${SERVER_PORT} >/dev/null 2>&1
+      interval: 1m
+      timeout: 10s
+      retries: 3
+
+networks:
+  npuser-network:
+    driver: bridge
+    name: npuser-network

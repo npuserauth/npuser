@@ -1,0 +1,1 @@
+To protect resources most services require users to create strong, hard to remember, passwords and we need different passwords for different systems.
