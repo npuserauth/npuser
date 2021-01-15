@@ -64,6 +64,6 @@ export async function getClientInfo (clientId: string): Promise<ClientInfo> {
       }
       return resolve(results)
     }
-    return reject(new BadRequest())
+    return reject(new BadRequest('Unknown npuser API client id.'))
   })
 }

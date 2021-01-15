@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit')
 
 const MAX_REQUEST_LIMIT = 100
 const DURATION = 1000 * 60 * 15 // 15 minute window
-const TOO_MANY_REQUESTS_ERROR = 'Too many requests triggered. Please, try again later!'
+const TOO_MANY_REQUESTS_ERROR = 'Too many requests triggered. Please, try again later.'
 
 export function rateLimitMiddle (): express.RequestHandler {
   return rateLimit({
